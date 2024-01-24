@@ -18,6 +18,12 @@ export const Container = styled.button`
 
     margin-top: 2.4rem;
 
+    @media (min-width: 425px) {
+        max-width: 38.9rem;
+        min-height: 25.8rem;
+        padding: 6.8rem 6rem;
+    }
+
     > label {
         align-self: center;
         cursor: pointer;
@@ -32,6 +38,7 @@ export const Container = styled.button`
         font-weight: 400;
         line-height: 1.6rem;
         letter-spacing: 0.5px;
+        text-align: left;
         color: ${({ theme }) => theme.COLORS.GRAY_4};
     }
 
@@ -40,6 +47,7 @@ export const Container = styled.button`
         font-weight: 400;
         line-height: 1.4rem;
         letter-spacing: 0.25px;
+        text-align: left;
         color: ${({ theme }) => theme.COLORS.GRAY_4};
     }
 `;
