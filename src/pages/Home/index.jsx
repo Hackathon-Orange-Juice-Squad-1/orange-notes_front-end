@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
 import { Input } from "../../components/Input";
@@ -16,7 +16,13 @@ export const Home = () => {
 
                 <Input label="Buscar tags" name="searchTags" />
 
-                <ButtonAddProject />
+                <Projects>
+                    <ButtonAddProject />
+
+                    <BlankSpace />
+
+                    <BlankSpace />
+                </Projects>
             </Main>
         </Container>
     );

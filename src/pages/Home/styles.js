@@ -33,3 +33,17 @@ export const Main = styled.main`
         color: ${({theme}) => theme.COLORS.GRAY_3};
     }
 `;
+
+export const Projects = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+`;  
+
+export const BlankSpace = styled.div`
+    width: 38.9rem;
+    align-self: stretch;
+    border-radius: 4px;
+    background: #fafafa;
+    margin-top: 2.4rem;
+`;
