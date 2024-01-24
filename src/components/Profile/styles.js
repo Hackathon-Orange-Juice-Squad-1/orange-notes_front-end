@@ -9,6 +9,12 @@ export const Container = styled.div`
 
     gap: 1.6rem;
 
+    @media (min-width: 425px) {
+        flex-direction: row;
+        justify-content: center;
+        gap: 4.2rem;
+    };
+
     > img {
         width: 12.2rem;
         height: 12.2rem;
@@ -20,6 +26,11 @@ export const Container = styled.div`
         flex-direction: column;
         align-items: flex-start;
         gap: 0.8rem;
+
+        @media (min-width: 425px) {
+            height: 12.2rem;
+            justify-content: space-between;        
+        }
 
         > h2 {
             font-size: 2.4rem;
@@ -34,6 +45,10 @@ export const Container = styled.div`
             line-height: 1.6rem;
             letter-spacing: 0.15px;
             color: ${props => props.theme.COLORS.GRAY_8};
+
+            @media (min-width: 425px) {
+                margin-bottom: 1rem;
+            }
         }
     }
 `;
