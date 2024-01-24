@@ -19,5 +19,7 @@ export const Main = styled.main`
 
     width: 100%;
 
+    padding: 5.6rem 8rem;
+
     overflow-y: auto;
 `;
