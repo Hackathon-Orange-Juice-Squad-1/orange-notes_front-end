@@ -26,7 +26,9 @@ const menuCloseAnimation = keyframes`
 `;
 
 export const Container = styled.header`
-    width: 100vw;
+    grid-area: header;
+
+    width: 100%;
     height: 6.4rem;
 
     padding: 1.6rem 3rem 1.6rem 6.5rem;
