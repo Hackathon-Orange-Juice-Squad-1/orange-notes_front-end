@@ -5,6 +5,10 @@ export const Container = styled.div`
 
     margin-bottom: 1.6rem;
 
+    @media (min-width: 425px) {
+        max-width: 51.3rem;
+    }
+
     > label {
         display: none;
     }
