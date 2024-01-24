@@ -19,7 +19,7 @@ export const Main = styled.main`
 
     width: 100%;
 
-    padding: 5.6rem 2.4rem;
+    padding: 12rem 2.4rem;
 
     overflow-y: auto;
 
