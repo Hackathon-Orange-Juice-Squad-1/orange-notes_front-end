@@ -19,7 +19,17 @@ export const Main = styled.main`
 
     width: 100%;
 
-    padding: 5.6rem 8rem;
+    padding: 5.6rem 2.4rem;
 
     overflow-y: auto;
+
+    > h2 {
+        margin: 4rem 0 1.6rem;
+
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 2rem;
+        letter-spacing: 0.15px;
+        color: ${({theme}) => theme.COLORS.GRAY_3};
+    }
 `;
