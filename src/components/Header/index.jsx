@@ -10,7 +10,7 @@ export const Header = () => {
 
     return (
         <Container>
-            <HamburgerButton className={isActive ? "icon iconActive" : "icon"} onClick={ToggleIsActive}>
+            <HamburgerButton className={isActive ? "iconOpen" : "iconClosed"} onClick={ToggleIsActive}>
                 <div className="hamburger hamburgerIcon"></div>
             </HamburgerButton>
 

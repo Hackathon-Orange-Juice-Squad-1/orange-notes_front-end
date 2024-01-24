@@ -1,17 +1,49 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const menuOpenAnimation = keyframes`
+    0% {
+        transform: scale(0);
+        transform-origin: 0% 0%;
+        }
+
+    100% {
+        transform: scale(1);
+        transform-origin: 0% 0%;
+    }
+`;
+
+const menuCloseAnimation = keyframes`
+    0% {
+        transform: scale(1);
+        transform-origin: 0% 0%;
+        }
+
+    100% {
+        transform: scale(0);
+        transform-origin: 0% 0%;
+        display: none;
+    }
+`;
 
 export const Container = styled.header`
     width: 100vw;
-    height: 7.3rem;
+    height: 6.4rem;
 
-    padding: 1.6rem 3.2rem;
+    padding: 1.6rem 3rem 1.6rem 6.5rem;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10rem;
+    flex-shrink: 0;
 
     background-color: ${({ theme }) => theme.COLORS.BLUE};
+
+    border-radius: 0 0 .5rem .5rem;
+
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
 
     position: relative;
 
@@ -21,16 +53,11 @@ export const Container = styled.header`
         }
     }
 
-    @media (max-width: 425px) {
-        height: 6.4rem;
-        padding: 1.6rem 3rem 1.6rem 6.5rem;
-        flex-shrink: 0;
-
-        border-radius: 0 0 .5rem .5rem;
-
-        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
-        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
-        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
+    @media (min-width: 425px) {
+        height: 7.3rem;
+        padding: 1.6rem 3.2rem;
+        border-radius: 0;
+        box-shadow: none;
     }
 `;
 
@@ -47,6 +74,27 @@ export const HamburgerButton = styled.button`
     border: none;
 
     cursor: pointer;
+
+    &.iconOpen {
+        .hamburger {
+            background: transparent;
+            box-shadow: 0 2px 5px transparent;
+
+            &::before,
+            &::after {
+                top: 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+            }
+
+            &::before {
+                transform: rotate(225deg);
+            }
+
+            &::after {
+                transform: rotate(135deg);
+            }
+        }
+    }
 
     > .hamburger {
         position: absolute;
@@ -96,10 +144,10 @@ export const Nav = styled.nav`
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
-    @media (max-width: 425px) {
-        justify-content: flex-end;
+    @media (min-width: 425px) {
+        justify-content: space-between;
     }
 `;
 
@@ -124,6 +172,7 @@ export const NavLinks = styled.ul`
 
     @media (max-width: 425px) {
         &.menuClosed {
+            animation: ${menuCloseAnimation} .5s ease-in-out;
             display: none;
         }
 
@@ -144,8 +193,10 @@ export const NavLinks = styled.ul`
 
             background-color: ${({ theme }) => theme.COLORS.WHITE_1};
 
-            border-radius: 4px;
+            border-radius: 4px; 
 
+            animation: ${menuOpenAnimation} .5s ease-in-out;
+        
             > li {
                 a {
                     font-size: 1.6rem;
