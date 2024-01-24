@@ -13,3 +13,11 @@ export const Container = styled.div`
         grid-template-rows: 7.3rem 1fr;
     }
 `;
+
+export const Main = styled.main`
+    grid-area: main;
+
+    width: 100%;
+
+    overflow-y: auto;
+`;

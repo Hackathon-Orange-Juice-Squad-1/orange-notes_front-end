@@ -1,6 +1,5 @@
-import { Container } from "./styles";
+import { Container, Main } from "./styles";
 import { Header } from "../../components/Header";
-import { Main } from "../../components/Main";
 import { Profile } from "../../components/Profile";
 
 export const Home = () => {
@@ -9,7 +8,7 @@ export const Home = () => {
             <Header />
 
             <Main>
-                <Profile />
+                <Profile userName="Camila Soares" userCountry="Brasil" />
             </Main>
         </Container>
     );
