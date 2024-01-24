@@ -23,6 +23,13 @@ export const Main = styled.main`
 
     overflow-y: auto;
 
+    @media (min-width: 425px) {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     > h2 {
         margin: 4rem 0 1.6rem;
 
@@ -30,20 +37,33 @@ export const Main = styled.main`
         font-weight: 500;
         line-height: 2rem;
         letter-spacing: 0.15px;
-        color: ${({theme}) => theme.COLORS.GRAY_3};
+        color: ${({ theme }) => theme.COLORS.GRAY_3};
+
+        @media (min-width: 425px) {
+            margin: 5.6rem 0 1.6rem;
+        }
     }
 `;
 
 export const Projects = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 2.4rem;
-`;  
+    @media (min-width: 425px) {
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 2.4rem;
+        /* margin-top: 4rem; */
+    }
+`;
 
 export const BlankSpace = styled.div`
-    width: 38.9rem;
-    align-self: stretch;
-    border-radius: 4px;
-    background: #fafafa;
-    margin-top: 2.4rem;
+    display: none;
+
+    @media (min-width: 425px) {
+        display: block;
+        width: 38.9rem;
+        align-self: stretch;
+        border-radius: 4px;
+        background: #fafafa;
+        margin-top: 2.4rem;
+    }
 `;
