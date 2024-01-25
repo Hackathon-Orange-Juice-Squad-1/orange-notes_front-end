@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export const Button = ({ label, onClick, ...props }) => {
+export const Button = ({ label, onClick, $primary, ...props }) => {
     return (
-        <Container onClick={onClick} { ...props }>
+        <Container onClick={onClick} $primary={$primary} { ...props }>
             { label }
         </Container>
     );

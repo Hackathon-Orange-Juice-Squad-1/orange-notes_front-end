@@ -21,7 +21,7 @@ export const Main = styled.main`
 
     padding: 12rem 2.4rem;
 
-    overflow-y: auto;
+    /* overflow-y: auto; */
 
     @media (min-width: 425px) {
         height: 100%;
