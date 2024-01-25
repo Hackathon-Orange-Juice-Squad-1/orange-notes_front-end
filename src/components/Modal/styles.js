@@ -42,11 +42,13 @@ export const ModalBody = styled.div`
     justify-content: center;
     align-items: flex-start;
     padding: 1.2rem 2.4rem;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 
     animation: ${modalOpenAnimation} .5s ease-in-out;
 
     @media (min-width: 425px) {
         min-width: 89rem;
+        padding: 2.4rem 2.4rem;
     }
 
     > h2 {
