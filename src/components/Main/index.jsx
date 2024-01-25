@@ -1,7 +1,9 @@
 import { Container } from "./styles";
 
-export const Main = () => {
+export const Main = ({ children }) => {
     return (
-        <Container />
+        <Container>
+            {children}
+        </Container>
     );
 };
