@@ -11,6 +11,11 @@ import { Button } from "../../components/Button";
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
 
+    const handleUploadClick = () => {
+        const fileInput = document.getElementById('upload');
+        fileInput.click();
+      };
+
     return (
         <Container>
             <Header />
@@ -42,7 +47,10 @@ export const Home = () => {
 
                 <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
-                <ButtonAddProject />
+                <label htmlFor="upload">
+                    <ButtonAddProject onClick={handleUploadClick} />
+                    <input type="file" id="upload" style={{display: "none"}} />
+                </label>
 
                 <h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3>
 
