@@ -14,7 +14,7 @@ import {
   ButtonEnter,
   FormA,
 } from "./styles";
-import { Main } from "../../components/Main";
+
 import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
 import imageIconClose from "../../assets/img/visibility-off.png";
@@ -55,59 +55,59 @@ export const Login = () => {
 
 
   return (
-    <Main>
-      <Container>
-        <ImageLogin src={imageLogin} alt="Imagem Login" />
 
-        <Content>
-          <Title>Entre no Orange Portfólio</Title>
+    <Container>
+      <ImageLogin src={imageLogin} alt="Imagem Login" />
 
-          <ButtonGoogle type="button" onClick={loginGoogle}>
-            <LogoGoogle
-              src={logoGoogle}
-              alt="Logo Google"
-              width={18}
-              height={18}
+      <Content>
+        <Title>Entre no Orange Portfólio</Title>
+
+        <ButtonGoogle type="button" onClick={loginGoogle}>
+          <LogoGoogle
+            src={logoGoogle}
+            alt="Logo Google"
+            width={18}
+            height={18}
+          />
+          Entrar com o Google
+        </ButtonGoogle>
+
+        <FormLogin>
+          <FormTitle>Faça login com email</FormTitle>
+          <FormControl>
+            <FormInput
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
             />
-            Entrar com o Google
-          </ButtonGoogle>
+            <FormLabel htmlFor="email">Email Address</FormLabel>
+          </FormControl>
 
-          <FormLogin>
-            <FormTitle>Faça login com email</FormTitle>
-            <FormControl>
-              <FormInput
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-              />
-              <FormLabel htmlFor="email">Email Address</FormLabel>
-            </FormControl>
+          <FormControl>
+            <FormInput
+              id="password"
+              name="password"
+              type={isOpen ? "text" : "password"}
+              autoComplete="current-password"
+            />
+            <FormLabel htmlFor="password">
+              Password
+            </FormLabel>
+            <FormIcon
+              src={isOpen ? imageIconClose : imageIconOpen}
+              title={isOpen ? "Esconder" : "Mostrar"}
+              onClick={handleClick}
+            />
+          </FormControl>
 
-            <FormControl>
-              <FormInput
-                id="password"
-                name="password"
-                type={isOpen ? "text" : "password"}
-                autoComplete="current-password"
-              />
-              <FormLabel htmlFor="password">
-                Password
-              </FormLabel>
-              <FormIcon
-                src={isOpen ? imageIconClose : imageIconOpen}
-                title={isOpen ? "Esconder" : "Mostrar"}
-                onClick={handleClick}
-              />
-            </FormControl>
+          <ButtonEnter>Entrar</ButtonEnter>
 
-            <ButtonEnter>Entrar</ButtonEnter>
+          <FormA><a href="#">Cadrastro</a></FormA>
 
-            <FormA><a href="#">Cadrastro</a></FormA>
+        </FormLogin>
+      </Content>
+    </Container>
 
-          </FormLogin>
-        </Content>
-      </Container>
-    </Main>
   );
 };
