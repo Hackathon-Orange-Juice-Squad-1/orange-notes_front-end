@@ -103,7 +103,7 @@ export const Login = () => {
 
           <ButtonEnter>Entrar</ButtonEnter>
 
-          <FormA><a href="#">Cadrastro</a></FormA>
+          <FormA><a href="#">Cadastro</a></FormA>
 
         </FormLogin>
       </Content>
