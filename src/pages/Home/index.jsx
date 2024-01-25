@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useToggleModal } from "../../hooks/useToggleModal";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
@@ -7,21 +7,21 @@ import { ButtonAddProject } from "../../components/ButtonAddProject";
 import { Modal } from "../../components/Modal";
 
 export const Home = () => {
-    const [open, setOpen] = useState(false);
+    const { open, toggleModal } = useToggleModal();
 
     return (
         <Container>
             <Header />
 
             <Main>
-                <Profile userName="Camila Soares" userCountry="Brasil" />
+                <Profile userName="Camila Soares" userCountry="Brasil" onClick={toggleModal} />
 
                 <h2>Meus projetos</h2>
 
                 <Input label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject onClick={() => setOpen(!open)} />
+                    <ButtonAddProject onClick={toggleModal} />
 
                     <BlankSpace />
 
@@ -31,7 +31,7 @@ export const Home = () => {
 
             <Modal isOpen={open}>
                 <h1>Modal</h1>
-                <button onClick={() => setOpen(!open)}>Fechar</button>
+                <button onClick={toggleModal}>Fechar</button>
             </Modal>
         </Container>
     );
