@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export const Button = ({ label, ...props }) => {
+export const Button = ({ label, onClick, ...props }) => {
     return (
-        <Container { ...props }>
+        <Container onClick={onClick} { ...props }>
             { label }
         </Container>
     );

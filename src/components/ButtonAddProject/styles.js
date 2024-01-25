@@ -24,13 +24,8 @@ export const Container = styled.button`
         padding: 6.8rem 6rem;
     }
 
-    > label {
+    > .icon {
         align-self: center;
-        cursor: pointer;
-
-        input {
-            display: none;
-        }
     }
 
     > h2 {
