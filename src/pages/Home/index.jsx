@@ -14,7 +14,7 @@ export const Home = () => {
     const handleUploadClick = () => {
         const fileInput = document.getElementById('upload');
         fileInput.click();
-      };
+    };
 
     return (
         <Container>
@@ -37,26 +37,30 @@ export const Home = () => {
             </Main>
 
             <Modal title="Adicionar projeto" open={open}>
-                <Input type="text" label="Título" name="title" />
+                <div className="modal__form">
+                    <Input type="text" label="Título" name="title" />
 
-                <Input type="text" label="Tags" name="tags" />
+                    <Input type="text" label="Tags" name="tags" />
 
-                <Input type="text" label="Link" name="link" />
+                    <Input type="text" label="Link" name="link" />
 
-                <Textarea label="Descrição" name="description" />
+                    <Textarea label="Descrição" name="description" />
+                </div>
 
-                <h3>Selecione o conteúdo que você deseja fazer upload</h3>
+                <div className="modal__file">
+                    <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
-                <label htmlFor="upload">
-                    <ButtonAddProject onClick={handleUploadClick} />
-                    <input type="file" id="upload" style={{display: "none"}} />
-                </label>
+                    <label htmlFor="upload">
+                        <ButtonAddProject onClick={handleUploadClick} />
+                        <input type="file" id="upload" style={{ display: "none" }} />
+                    </label>
 
-                <h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3>
+                    <h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3>
 
-                <div style={{ display: "flex", gap: "1.6rem" }}>
-                    <Button label="Salvar" $primary="true" />
-                    <Button label="Cancelar" onClick={toggleModal} />
+                    <div style={{ display: "flex", gap: "1.6rem" }}>
+                        <Button label="Salvar" $primary="true" />
+                        <Button label="Cancelar" onClick={toggleModal} />
+                    </div>
                 </div>
             </Modal>
         </Container>

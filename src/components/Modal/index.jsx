@@ -6,7 +6,9 @@ export const Modal = ({ children, open, title }) => {
         <Container open={open}>
           <ModalBody>
             <h2>{title}</h2>
-            {children}
+            <div>
+              {children}
+            </div>
           </ModalBody>
         </Container>
       );
