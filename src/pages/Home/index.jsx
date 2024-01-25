@@ -5,6 +5,7 @@ import { Profile } from "../../components/Profile";
 import { Input } from "../../components/Input";
 import { ButtonAddProject } from "../../components/ButtonAddProject";
 import { Modal } from "../../components/Modal";
+import { Button } from "../../components/Button";
 
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
@@ -29,9 +30,9 @@ export const Home = () => {
                 </Projects>
             </Main>
 
-            <Modal isOpen={open}>
+            <Modal open={open}>
                 <h1>Modal</h1>
-                <button onClick={toggleModal}>Fechar</button>
+                <Button label="Cancelar" onClick={toggleModal} />
             </Modal>
         </Container>
     );

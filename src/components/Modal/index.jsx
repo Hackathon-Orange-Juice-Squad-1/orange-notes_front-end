@@ -1,9 +1,9 @@
 import { Container, ModalBody } from "./styles";
 
-export const Modal = ({ children, isOpen }) => {
-  if (isOpen) {
+export const Modal = ({ children, open }) => {
+  if (open) {
     return (
-        <Container isOpen={isOpen}>
+        <Container open={open}>
           <ModalBody>
             {children}
           </ModalBody>
