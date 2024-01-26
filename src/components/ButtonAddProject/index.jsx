@@ -1,11 +1,15 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png"
 import iconEdit from "../../assets/img/icon_edit.svg";
+import { useState } from "react";
 import { FaImages } from "react-icons/fa";
-import { Container, Thumbnail } from "./styles";
+import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
 export const ButtonAddProject = ({ onClick, userHasProjects, className }) => {
+    const [isActive, setIsActive] = useState(false);
+    const ToggleIsActive = () => setIsActive(!isActive);
+
     if (userHasProjects) {
         return (
             <Container onClick={onClick}>
@@ -21,11 +25,11 @@ export const ButtonAddProject = ({ onClick, userHasProjects, className }) => {
             <Thumbnail>
                 <img src={thumbnail} alt="Thumbnail de preview do projeto" />
 
-                <button className={className}>
+                <button className={className} onClick={ToggleIsActive}>
                     <img src={iconEdit} alt="Ícone de edição" />
                 </button>
 
-                <div>
+                <div className={className}>
                     <ProfileSmall userName="Camila Soares" index="12/12" className="on-thumb" />
 
                     <ul>
@@ -33,6 +37,15 @@ export const ButtonAddProject = ({ onClick, userHasProjects, className }) => {
                         <Tag tag="Web" />
                     </ul>
                 </div>
+
+                <Nav className={isActive ? "navOpen" : "navClosed"}>
+                <div className="arrow-up"></div>
+
+                    <ul>
+                        <li><button>Editar</button></li>
+                        <li><button>Excluir</button></li>
+                    </ul>
+                </Nav>
             </Thumbnail>
         );
     };
