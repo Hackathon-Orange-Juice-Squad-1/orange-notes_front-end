@@ -1,5 +1,6 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import { useToggleModal } from "../../hooks/useToggleModal";
+import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
@@ -12,6 +13,7 @@ import { ModalPreview } from "../../components/ModalPreview";
 
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
+    const { preview, togglePreview } = useTogglePreview();
 
     const handleUploadClick = () => {
         const fileInput = document.getElementById('upload');
@@ -57,7 +59,13 @@ export const Home = () => {
                         <input type="file" id="upload" style={{ display: "none" }} />
                     </label>
 
-                    <a href="/"><h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3></a>
+                    <button 
+                        className="preview" 
+                        style={{ margin: "1.6rem 0", background: "none", border: "none" }}
+                        onClick={() => { toggleModal(); togglePreview(); 
+                    }}>
+                            Visualizar publicação
+                    </button>
                     
                     <div style={{ display: "flex", gap: "1.6rem" }}>
                         <Button label="Salvar" $primary="true" />
@@ -71,7 +79,8 @@ export const Home = () => {
                 image={thumbnail} 
                 description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
                 link="https://gumroad.com/products/wxCSL"
-                previewopen={false}>
+                onClick={togglePreview}
+                preview={preview}>
 
             </ModalPreview>
         </Container>
