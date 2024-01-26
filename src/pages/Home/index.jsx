@@ -1,3 +1,4 @@
+import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
@@ -7,6 +8,7 @@ import { ButtonAddProject } from "../../components/ButtonAddProject";
 import { Modal } from "../../components/Modal";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
+import { ModalPreview } from "../../components/ModalPreview";
 
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
@@ -55,14 +57,23 @@ export const Home = () => {
                         <input type="file" id="upload" style={{ display: "none" }} />
                     </label>
 
-                    <h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3>
-
+                    <a href="/"><h3 style={{ margin: "1.6rem 0" }}>Visualizar publicação</h3></a>
+                    
                     <div style={{ display: "flex", gap: "1.6rem" }}>
                         <Button label="Salvar" $primary="true" />
                         <Button label="Cancelar" onClick={toggleModal} />
                     </div>
                 </div>
             </Modal>
+
+            <ModalPreview 
+                title="Ecommerce One Page" 
+                image={thumbnail} 
+                description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
+                link="https://gumroad.com/products/wxCSL"
+                previewopen>
+
+            </ModalPreview>
         </Container>
     );
 };

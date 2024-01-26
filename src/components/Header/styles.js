@@ -48,6 +48,7 @@ export const Container = styled.header`
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.6);
 
     position: fixed;
+    z-index: 1;
 
     > a {
         img {
