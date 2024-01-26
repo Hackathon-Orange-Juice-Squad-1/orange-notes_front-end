@@ -93,7 +93,7 @@ export const FormInput = styled.input`
     height: 100%;
     padding: 0 12px;
     width: 100%;
-    
+    &:not(:placeholder-shown) ~ label,
     &:focus ~ ${FormLabel} {
         ${labelStyle}
     }
@@ -138,7 +138,7 @@ export const FormIcon = styled.img`
     transform: translateY(-50%);
 `;
 
-export const FormA = styled.a`
+export const LinkRegister = styled.a`
     color: #818388;
     font-family: Roboto;
     font-size: 16px;
