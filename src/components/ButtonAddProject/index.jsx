@@ -1,6 +1,6 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png"
 import iconEdit from "../../assets/img/icon_edit.svg";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaImages } from "react-icons/fa";
 import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
@@ -8,6 +8,7 @@ import { Tag } from "../Tag";
 
 export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUserHasProjects, editModal, toggleModal }) => {
     const [isActive, setIsActive] = useState(false);
+    const navRef = useRef();
     const ToggleIsActive = () => setIsActive(!isActive);
 
     const handleEditClick = () => {
@@ -19,6 +20,19 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUs
         toggleUserHasProjects();
         ToggleIsActive();
     }
+
+    const handleClickOutside = (event) => {
+        if (navRef.current && !navRef.current.contains(event.target)) {
+            setIsActive(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     if (!userHasProjects) {
         return (
@@ -48,7 +62,7 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUs
                     </ul>
                 </div>
 
-                <Nav className={isActive ? "navOpen" : "navClosed"}>
+                <Nav ref={navRef} className={isActive ? "navOpen" : "navClosed"}>
                 <div className="arrow-up"></div>
 
                     <ul>
