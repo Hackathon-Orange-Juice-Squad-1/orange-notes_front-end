@@ -1,4 +1,5 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
+import React, { useState } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
@@ -17,6 +18,11 @@ export const Home = () => {
     const { preview, togglePreview } = useTogglePreview();
     const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
 
+    const [edit, toggleEdit] = useState(false);
+    const editModal = () => toggleEdit(true);
+    const addModal = () => toggleEdit(false);
+    const modalTitle = edit ? "Editar projeto" : "Adicionar projeto";
+
     // const handleUploadClick = () => {
     //     const fileInput = document.getElementById('upload');
     //     fileInput.click();
@@ -28,14 +34,14 @@ export const Home = () => {
             <Header />
 
             <Main>
-                <Profile userName="Camila Soares" userCountry="Brasil" onClick={toggleModal} />
+                <Profile userName="Camila Soares" userCountry="Brasil" onClick={() => { toggleModal(); addModal(); }} />
 
                 <h2>Meus projetos</h2>
 
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject onClick={toggleModal} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} />
+                    <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} />
 
                     <BlankSpace />
 
@@ -43,7 +49,7 @@ export const Home = () => {
                 </Projects>
             </Main>
 
-            <Modal title="Adicionar projeto" open={open}>
+            <Modal title={modalTitle} open={open}>
                 <div className="modal__form">
                     <Input type="text" label="Título" name="title" />
 

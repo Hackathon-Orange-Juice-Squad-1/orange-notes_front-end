@@ -6,9 +6,14 @@ import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
-export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUserHasProjects }) => {
+export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUserHasProjects, editModal, toggleModal }) => {
     const [isActive, setIsActive] = useState(false);
     const ToggleIsActive = () => setIsActive(!isActive);
+
+    const handleEditClick = () => {
+        editModal();
+        toggleModal();
+    }
 
     const handleDeleteClick = () => {
         toggleUserHasProjects();
@@ -47,7 +52,7 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUs
                 <div className="arrow-up"></div>
 
                     <ul>
-                        <li><button>Editar</button></li>
+                        <li><button onClick={handleEditClick}>Editar</button></li>
                         <li><button onClick={handleDeleteClick}>Excluir</button></li>
                     </ul>
                 </Nav>
