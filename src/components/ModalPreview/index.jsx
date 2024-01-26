@@ -28,7 +28,7 @@ export const ModalPreview = ({ title, image, description, link, preview, onClick
             </p>
 
             <h3>Download</h3>
-            <a href={link}>{link}</a>
+            <a href={link} target="_blank">{link}</a>
           </ModalBody>
         </Container>
       );

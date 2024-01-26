@@ -1,9 +1,9 @@
 import avatar from "../../assets/img/avatar-2x.png";
 import { Container } from "./styles";
 
-export const ProfileSmall = ({ userName, index }) => {
+export const ProfileSmall = ({ userName, index, className }) => {
     return (
-        <Container>
+        <Container className={className}>
             <img src={avatar} alt="Imagem de avatar de usuário" />
 
             <div>

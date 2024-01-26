@@ -55,7 +55,7 @@ export const Home = () => {
                     <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
                     <label htmlFor="upload">
-                        <ButtonAddProject onClick={handleUploadClick} />
+                        <ButtonAddProject onClick={handleUploadClick} className="on-edit" />
                         <input type="file" id="upload" style={{ display: "none" }} />
                     </label>
 

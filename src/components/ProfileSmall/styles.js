@@ -32,4 +32,32 @@ export const Container = styled.div`
             color: ${({ theme }) => theme.COLORS.GRAY_2};
         }
     }
+
+    &.on-thumb {
+        gap: 8px;
+
+        img {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+
+        div {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+
+            h2 {
+                font-weight: 400;
+                color: ${({ theme }) => theme.COLORS.GRAY_2};
+            }
+
+            span::before {
+                content: "•";
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: ${({ theme }) => theme.COLORS.GRAY_2};
+                margin-right: 8px;
+            }
+        }
+    }
 `;
