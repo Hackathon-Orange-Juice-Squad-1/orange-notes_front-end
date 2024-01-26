@@ -34,6 +34,7 @@ export const Home = () => {
     const editModal = () => toggleEdit(true);
     const addModal = () => toggleEdit(false);
     const modalTitle = edit ? "Editar projeto" : "Adicionar projeto";
+    const successModalTitle = edit ? "Edição concluída com sucesso!" : "Projeto adicionado com sucesso!";
 
     // const handleUploadClick = () => {
     //     const fileInput = document.getElementById('upload');
@@ -105,7 +106,7 @@ export const Home = () => {
 
             </ModalPreview>
 
-            <ModalSuccess title="Projeto adicionado com sucesso!" onClick={toggleSuccessModal} success={success} />
+            <ModalSuccess title={successModalTitle} onClick={toggleSuccessModal} success={success} />
         </Container>
     );
 };
