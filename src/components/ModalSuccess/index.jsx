@@ -2,16 +2,16 @@ import check from "../../assets/img/success-icon.svg";
 import { Container, ModalBody } from "./styles";
 import { Button } from "../Button";
 
-export const ModalSuccess = ({ open, title }) => {
-  if (open) {
+export const ModalSuccess = ({ success, title, onClick }) => {
+  if (success) {
     return (
-        <Container open={open}>
+        <Container success={success}>
           <ModalBody>
             <h2>{title}</h2>
             
             <img src={check} alt="Ícone de confirmação" />
 
-            <Button label="Voltar para projetos" $primary />
+            <Button label="Voltar para projetos" $primary onClick={onClick} />
           </ModalBody>
         </Container>
       );

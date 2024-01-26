@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
+import { useToggleSuccessModal } from "../../hooks/useToggleSuccessModal";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
@@ -17,7 +18,17 @@ import { ModalSuccess } from "../../components/ModalSuccess";
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
+    const { success, toggleSuccessModal } = useToggleSuccessModal();
     const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
+
+    const handleSaveClick = () => {
+        if (userHasProjects) {
+            toggleModal();
+            toggleSuccessModal();
+        } else {
+            alert('Por favor, insira a imagem e os dados do seu projeto.')
+        }
+    };
 
     const [edit, toggleEdit] = useState(false);
     const editModal = () => toggleEdit(true);
@@ -78,7 +89,7 @@ export const Home = () => {
                     </button>
                     
                     <div style={{ display: "flex", gap: "1.6rem" }}>
-                        <Button label="Salvar" $primary="true" />
+                        <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
                         <Button label="Cancelar" onClick={toggleModal} />
                     </div>
                 </div>
@@ -94,7 +105,7 @@ export const Home = () => {
 
             </ModalPreview>
 
-            <ModalSuccess title="Projeto adicionado com sucesso!" open={true} />
+            <ModalSuccess title="Projeto adicionado com sucesso!" onClick={toggleSuccessModal} success={success} />
         </Container>
     );
 };
