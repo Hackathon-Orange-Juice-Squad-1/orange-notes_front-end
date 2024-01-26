@@ -11,6 +11,7 @@ export const Container = styled.div`
 
     @media (min-width: 425px) {
         grid-template-rows: 7.3rem 1fr;
+        gap: 11.2rem;
     }
 `;
 
@@ -21,13 +22,13 @@ export const Main = styled.main`
 
     padding: 12rem 2.4rem;
 
-    /* overflow-y: auto; */
-
     @media (min-width: 425px) {
-        height: 100%;
+        max-height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding-bottom: 0;
+        overflow: auto;
     }
 
     > h2 {

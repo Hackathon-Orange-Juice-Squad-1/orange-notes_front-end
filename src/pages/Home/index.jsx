@@ -1,6 +1,7 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
+import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
@@ -14,11 +15,13 @@ import { ModalPreview } from "../../components/ModalPreview";
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
+    const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
 
-    const handleUploadClick = () => {
-        const fileInput = document.getElementById('upload');
-        fileInput.click();
-    };
+    // const handleUploadClick = () => {
+    //     const fileInput = document.getElementById('upload');
+    //     fileInput.click();
+    // };
+
 
     return (
         <Container>
@@ -32,7 +35,7 @@ export const Home = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject onClick={toggleModal} />
+                    <ButtonAddProject onClick={toggleModal} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} />
 
                     <BlankSpace />
 
@@ -55,7 +58,7 @@ export const Home = () => {
                     <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
                     <label htmlFor="upload">
-                        <ButtonAddProject onClick={handleUploadClick} className="on-edit" />
+                        <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
                         <input type="file" id="upload" style={{ display: "none" }} />
                     </label>
 
