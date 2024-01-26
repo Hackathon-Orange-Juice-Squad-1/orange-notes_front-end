@@ -31,6 +31,15 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     padding: 6.4rem 2.4rem; 
+
+    @media (min-width: 425px) {
+        z-index: 999;
+        background-color: #00000050;
+        backdrop-filter: blur(2px);
+        padding: 13.4rem 11.9rem; 
+        overflow: hidden;
+
+    }
 `;
 
 export const ModalBody = styled.div`
@@ -42,13 +51,28 @@ export const ModalBody = styled.div`
     justify-content: center;
     align-items: center;
     padding: 7.6rem 2.4rem;
-    /* box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25); */
 
     animation: ${modalOpenAnimation} .5s ease-in-out;
 
     @media (min-width: 425px) {
-        min-width: 89rem;
-        padding: 2.4rem 2.4rem;
+        position: relative;
+        max-width: 100%;
+        padding: 5.6rem 10.2rem;
+        box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    > button {
+        display: none;
+        z-index: 999;
+
+        @media (min-width: 425px) {
+            display: block;
+            position: absolute;
+            top: 1.6rem;
+            right: 2rem;
+            background-color: transparent;
+            border: none;
+        }
     }
 
     > h2 {
@@ -57,6 +81,10 @@ export const ModalBody = styled.div`
         line-height: 2.4rem;
         color: ${({ theme }) => theme.COLORS.GRAY_3};
         margin-bottom: 3.2rem;
+
+        @media (min-width: 425px) {
+            margin-bottom: 4.5rem;
+        }
     }
 
     > img {
@@ -65,6 +93,11 @@ export const ModalBody = styled.div`
         height: auto;
         border-radius: 4px;
         margin-bottom: 1rem;
+
+        @media (min-width: 425px) {
+            max-width: 100%;
+            margin-bottom: 6.4rem;
+        }
     }
 
     > div {
@@ -80,11 +113,9 @@ export const ModalBody = styled.div`
         }
 
         @media (min-width: 425px) {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2.4rem;
+            position: absolute;
+            top: 0;
+            padding: 5.6rem 10.2rem;
             width: 100%;
         }
     }
@@ -108,5 +139,6 @@ export const ModalBody = styled.div`
 
     > a {
         margin-bottom: 4rem;
+        align-self: flex-start;
     }
 `;

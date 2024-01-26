@@ -1,12 +1,15 @@
+import { CgClose } from "react-icons/cg";
 import { Container, ModalBody } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
-export const ModalPreview = ({ title, image, description, link, previewopen="true" }) => {
+export const ModalPreview = ({ title, image, description, link, previewopen="true", onClick }) => {
   if (previewopen) {
     return (
         <Container open={previewopen}>
           <ModalBody>
+            <button onClick={onClick}><CgClose size={24} /></button>
+
             <h2>{title}</h2>
 
             <img src={image} alt="Imagem de preview do projeto" />
