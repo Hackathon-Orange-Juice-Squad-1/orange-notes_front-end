@@ -46,7 +46,7 @@ export const Login = () => {
 
   const loginGoogle = () => {
     tokenClient.callback = () => {
-      alert("Sucesso");
+      navigate('/');
     };
     tokenClient.requestAccessToken({ prompt: "consent" });
   };
