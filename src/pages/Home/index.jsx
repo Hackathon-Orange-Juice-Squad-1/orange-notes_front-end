@@ -14,6 +14,7 @@ import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
 import { ModalPreview } from "../../components/ModalPreview";
 import { ModalSuccess } from "../../components/ModalSuccess";
+import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
@@ -107,6 +108,8 @@ export const Home = () => {
             </ModalPreview>
 
             <ModalSuccess title={successModalTitle} onClick={toggleSuccessModal} success={success} />
+
+            <ModalConfirmDelete confirmDelete={true} onClick={toggleUserHasProjects} />
         </Container>
     );
 };
