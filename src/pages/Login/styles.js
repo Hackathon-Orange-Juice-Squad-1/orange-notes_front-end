@@ -5,6 +5,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10.3rem;
 `;
 
 export const Content = styled.section`
@@ -12,21 +13,20 @@ export const Content = styled.section`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 32px;
+    gap: 3.2rem;
     width: 100%;
+
+    > h1 {
+        color: ${({ theme }) => theme.COLORS.BLUE_2};
+        text-align: center;
+        font-size: 4.8rem;
+        font-weight: 400;
+        line-height: 4rem;
+    }
 `;
 
 export const ImageLogin = styled.img`
     height: 100vh;
-`;
-
-export const Title = styled.h1`
-    color: #224;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 48px;
-    font-weight: 400;
-    line-height: 40px;
 `;
 
 export const ButtonGoogle = styled.button`
@@ -58,14 +58,14 @@ export const FormLogin = styled.form`
     flex-direction: column;
     justify-content: center;
     gap: 16px;
-`;
 
-export const FormTitle = styled.h5`
-    color: #515255;
-    font-family: Roboto;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 24px;
+    > a {
+        font-size: 1.6rem;
+        font-weight: 400;
+        line-height: 1.6rem;
+        letter-spacing: 0.15px;
+        color: ${({ theme }) => theme.COLORS.GRAY_2};
+    }
 `;
 
 export const labelStyle = css`
@@ -136,13 +136,4 @@ export const FormIcon = styled.img`
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-`;
-
-export const FormA = styled.a`
-    color: #818388;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0.15px;
 `;

@@ -2,18 +2,15 @@ import {
   Content,
   Container,
   ImageLogin,
-  Title,
   ButtonGoogle,
   LogoGoogle,
-  FormLogin,
-  FormTitle,
   FormControl,
   FormLabel,
   FormInput,
   FormIcon,
   ButtonEnter,
-  FormA,
 } from "./styles";
+import { Form } from "../../components/Form";
 
 import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
@@ -22,6 +19,7 @@ import imageIconOpen from "../../assets/img/visibility-on.png";
 
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 window.gapi.load("client", initializeClient);
 
@@ -57,10 +55,10 @@ export const Login = () => {
   return (
 
     <Container>
-      <ImageLogin src={imageLogin} alt="Imagem Login" />
+      <ImageLogin src={imageLogin} alt="Imagem ilustrativa de Login" />
 
       <Content>
-        <Title>Entre no Orange Portfólio</Title>
+        <h1>Entre no Orange Portfólio</h1>
 
         <ButtonGoogle type="button" onClick={loginGoogle}>
           <LogoGoogle
@@ -72,8 +70,7 @@ export const Login = () => {
           Entrar com o Google
         </ButtonGoogle>
 
-        <FormLogin>
-          <FormTitle>Faça login com email</FormTitle>
+        <Form title="Faça login com email">
           <FormControl>
             <FormInput
               id="email"
@@ -103,9 +100,9 @@ export const Login = () => {
 
           <ButtonEnter>Entrar</ButtonEnter>
 
-          <FormA><a href="#">Cadastro</a></FormA>
+          <Link to="/signup">Cadastre-se</Link>
 
-        </FormLogin>
+        </Form>
       </Content>
     </Container>
 
