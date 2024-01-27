@@ -25,6 +25,8 @@ export const Home = () => {
     const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
 
     const handleSaveClick = () => {
+        toggleDeletion(false);
+
         if (userHasProjects) {
             toggleModal();
             toggleSuccessModal();
@@ -48,7 +50,9 @@ export const Home = () => {
 
     const handleConfirmDeleteClick = () => {
         toggleUserHasProjects();
+        toggleDeletion(true);
         toggleConfirmDeleteModal();
+        toggleSuccessModal();
     };
 
     const handleCancelDeleteClick = () => {
@@ -56,10 +60,21 @@ export const Home = () => {
     };
 
     const [edit, toggleEdit] = useState(false);
+    const [deletion, toggleDeletion] = useState(false);
     const editModal = () => toggleEdit(true);
     const addModal = () => toggleEdit(false);
     const modalTitle = edit ? "Editar projeto" : "Adicionar projeto";
-    const successModalTitle = edit ? "Edição concluída com sucesso!" : "Projeto adicionado com sucesso!";
+    const successModalTitle = () => {
+        if (deletion) {
+            return "Projeto deletado com sucesso!";
+        } else {
+            if (edit) {
+                return "Projeto editado com sucesso!";
+            } else {
+                return "Projeto adicionado com sucesso!";
+            }
+        }
+    };
 
     // const handleUploadClick = () => {
     //     const fileInput = document.getElementById('upload');
@@ -130,7 +145,7 @@ export const Home = () => {
 
             </ModalPreview>
 
-            <ModalSuccess title={successModalTitle} onClick={toggleSuccessModal} success={success} />
+            <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />
 
             <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={handleConfirmDeleteClick} handleCancelDeleteClick={handleCancelDeleteClick} />
         </Container>
