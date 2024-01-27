@@ -33,6 +33,15 @@ export const Home = () => {
         }
     };
 
+    const handlePreviewClick = () => {
+        if (userHasProjects) {
+            toggleModal();
+            togglePreview();
+        } else {
+            alert('Por favor, insira a imagem e os dados do seu projeto.')
+        }
+    };
+
     const handleDeleteClick = () => {
         toggleConfirmDeleteModal();
     };
@@ -100,8 +109,7 @@ export const Home = () => {
                     <button 
                         className="preview" 
                         style={{ margin: "1.6rem 0", background: "none", border: "none" }}
-                        onClick={() => { toggleModal(); togglePreview(); 
-                    }}>
+                        onClick={handlePreviewClick}>
                             Visualizar publicação
                     </button>
                     

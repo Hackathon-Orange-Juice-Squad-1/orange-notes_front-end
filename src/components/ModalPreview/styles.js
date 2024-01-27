@@ -50,7 +50,7 @@ export const ModalBody = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 7.6rem 2.4rem;
+    padding: 7.6rem 2.4rem 9.6rem;
 
     animation: ${modalOpenAnimation} .5s ease-in-out;
 
@@ -62,16 +62,17 @@ export const ModalBody = styled.div`
     }
 
     > button {
-        display: none;
+        /* display: none; */
         z-index: 999;
+        display: block;
+        position: absolute;
+        top: 8rem;
+        right: 2rem;
+        background-color: transparent;
+        border: none;
 
         @media (min-width: 425px) {
-            display: block;
-            position: absolute;
             top: 1.6rem;
-            right: 2rem;
-            background-color: transparent;
-            border: none;
         }
     }
 
