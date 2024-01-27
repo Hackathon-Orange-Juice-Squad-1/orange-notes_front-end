@@ -44,6 +44,11 @@ export const Home = () => {
         }
     };
 
+    const handleClosePreviewClick = () => {
+        togglePreview();
+        toggleModal();
+    };
+
     const handleDeleteClick = () => {
         toggleConfirmDeleteModal();
     };
@@ -140,7 +145,7 @@ export const Home = () => {
                 image={thumbnail} 
                 description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
                 link="https://gumroad.com/products/wxCSL"
-                onClick={togglePreview}
+                onClick={handleClosePreviewClick}
                 preview={preview}>
 
             </ModalPreview>
