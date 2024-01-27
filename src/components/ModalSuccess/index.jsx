@@ -5,7 +5,7 @@ import { Button } from "../Button";
 export const ModalSuccess = ({ success, title, onClick }) => {
   if (success) {
     return (
-        <Container success={success}>
+        <Container>
           <ModalBody>
             <h2>{title}</h2>
             

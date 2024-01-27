@@ -4,7 +4,7 @@ import { Button } from "../Button";
 export const ModalConfirmDelete = ({ confirmDelete, handleConfirmDeleteClick, handleCancelDeleteClick }) => {
   if (confirmDelete) {
     return (
-        <Container confirmDelete={confirmDelete}>
+        <Container>
           <ModalBody>
             <h2>Deseja Excluir?</h2>
             

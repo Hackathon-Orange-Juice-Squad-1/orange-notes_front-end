@@ -6,7 +6,7 @@ import { Tag } from "../Tag";
 export const ModalPreview = ({ title, image, description, link, preview, onClick }) => {
   if (preview) {
     return (
-        <Container preview={preview}>
+        <Container>
           <ModalBody>
             <button onClick={onClick}><CgClose size={24} /></button>
 
