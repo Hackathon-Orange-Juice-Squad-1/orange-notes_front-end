@@ -6,7 +6,7 @@ import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
-export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUserHasProjects, editModal, toggleModal }) => {
+export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUserHasProjects, editModal, toggleModal, handleDeleteClick }) => {
     const [isActive, setIsActive] = useState(false);
     const navRef = useRef();
     const ToggleIsActive = () => setIsActive(!isActive);
@@ -16,10 +16,10 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUs
         toggleModal();
     }
 
-    const handleDeleteClick = () => {
-        toggleUserHasProjects();
-        ToggleIsActive();
-    }
+    // const handleDeleteClick = () => {
+    //     toggleUserHasProjects();
+    //     ToggleIsActive();
+    // }
 
     const handleClickOutside = (event) => {
         if (navRef.current && !navRef.current.contains(event.target)) {

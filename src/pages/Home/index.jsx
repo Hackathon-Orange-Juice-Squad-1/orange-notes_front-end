@@ -4,6 +4,7 @@ import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
 import { useToggleSuccessModal } from "../../hooks/useToggleSuccessModal";
+import { useToggleConfirmDeleteModal } from "../../hooks/useToggleConfirmDeleteModal";
 import { Container, Main, Projects, BlankSpace } from "./styles";
 import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
@@ -20,6 +21,7 @@ export const Home = () => {
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
     const { success, toggleSuccessModal } = useToggleSuccessModal();
+    const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
     const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
 
     const handleSaveClick = () => {
@@ -29,6 +31,19 @@ export const Home = () => {
         } else {
             alert('Por favor, insira a imagem e os dados do seu projeto.')
         }
+    };
+
+    const handleDeleteClick = () => {
+        toggleConfirmDeleteModal();
+    };
+
+    const handleConfirmDeleteClick = () => {
+        toggleUserHasProjects();
+        toggleConfirmDeleteModal();
+    };
+
+    const handleCancelDeleteClick = () => {
+        toggleConfirmDeleteModal();
     };
 
     const [edit, toggleEdit] = useState(false);
@@ -55,7 +70,7 @@ export const Home = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} />
+                    <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} handleDeleteClick={handleDeleteClick} />
 
                     <BlankSpace />
 
@@ -109,7 +124,7 @@ export const Home = () => {
 
             <ModalSuccess title={successModalTitle} onClick={toggleSuccessModal} success={success} />
 
-            <ModalConfirmDelete confirmDelete={true} onClick={toggleUserHasProjects} />
+            <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={handleConfirmDeleteClick} handleCancelDeleteClick={handleCancelDeleteClick} />
         </Container>
     );
 };
