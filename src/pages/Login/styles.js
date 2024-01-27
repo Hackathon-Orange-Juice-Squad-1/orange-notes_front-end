@@ -1,10 +1,27 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 
 export const Container = styled.div`
+    width: 100%;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+
+    @media (min-width: 425px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    };
+`;
+
+export const ImageLogin = styled.img`
+    display: none;
+    @media (min-width: 425px) {
+        display: block;
+        height: 100vh;
+    }
 `;
 
 export const Content = styled.section`
@@ -16,16 +33,17 @@ export const Content = styled.section`
     width: 100%;
 
     > h1 {
-        color: ${({ theme }) => theme.COLORS.BLUE_2};
-        text-align: center;
-        font-size: 4.8rem;
+        font-size: 2.4rem;
         font-weight: 400;
-        line-height: 4rem;
-    }
-`;
+        line-height: 2.4rem;
+        color: ${({ theme }) => theme.COLORS.BLUE_2};
 
-export const ImageLogin = styled.img`
-    height: 100vh;
+        @media (min-width: 425px) {
+            /* text-align: center; */
+            font-size: 4.8rem;
+            line-height: 4rem;
+        }
+    }
 `;
 
 export const ButtonGoogle = styled.button`
@@ -51,21 +69,21 @@ export const LogoGoogle = styled.img`
     gap: 8px;
 `;
 
-export const FormLogin = styled.form`
-    display: flex;
-    width: 517px;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
+// export const FormLogin = styled.form`
+//     display: flex;
+//     width: 517px;
+//     flex-direction: column;
+//     justify-content: center;
+//     gap: 16px;
 
-    > a {
-        font-size: 1.6rem;
-        font-weight: 400;
-        line-height: 1.6rem;
-        letter-spacing: 0.15px;
-        color: ${({ theme }) => theme.COLORS.GRAY_2};
-    }
-`;
+//     > a {
+//         font-size: 1.6rem;
+//         font-weight: 400;
+//         line-height: 1.6rem;
+//         letter-spacing: 0.15px;
+//         color: ${({ theme }) => theme.COLORS.GRAY_2};
+//     }
+// `;
 
 // export const labelStyle = css`
 //     background-color: #ffffff;
