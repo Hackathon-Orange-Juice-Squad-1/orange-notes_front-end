@@ -4,13 +4,10 @@ import {
   ImageLogin,
   ButtonGoogle,
   LogoGoogle,
-  FormControl,
-  FormLabel,
-  FormInput,
-  FormIcon,
-  ButtonEnter,
 } from "./styles";
 import { Form } from "../../components/Form";
+import { FormInput } from "../../components/FormInput";
+import { Button } from "../../components/Button";
 
 import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
@@ -36,8 +33,8 @@ const tokenClient = window.google.accounts.oauth2.initTokenClient({
 });
 
 export const Login = () => {
-
   const [isOpen, setIsOpen] = useState(false);
+
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
@@ -50,7 +47,6 @@ export const Login = () => {
     };
     tokenClient.requestAccessToken({ prompt: "consent" });
   };
-
 
   return (
 
@@ -71,34 +67,25 @@ export const Login = () => {
         </ButtonGoogle>
 
         <Form title="Faça login com email">
-          <FormControl>
-            <FormInput
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-            />
-            <FormLabel htmlFor="email">Email Address</FormLabel>
-          </FormControl>
+          <FormInput
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            label="Email Address"
+          />
 
-          <FormControl>
-            <FormInput
-              id="password"
-              name="password"
-              type={isOpen ? "text" : "password"}
-              autoComplete="current-password"
-            />
-            <FormLabel htmlFor="password">
-              Password
-            </FormLabel>
-            <FormIcon
-              src={isOpen ? imageIconClose : imageIconOpen}
-              title={isOpen ? "Esconder" : "Mostrar"}
-              onClick={handleClick}
-            />
-          </FormControl>
+          <FormInput
+            id="password"
+            name="password"
+            type={isOpen ? "text" : "password"}
+            autoComplete="current-password"
+            label="Password"
+            icon={isOpen ? imageIconOpen : imageIconClose}
+            onClick={handleClick}
+          />
 
-          <ButtonEnter>Entrar</ButtonEnter>
+          <Button type="submit" label="Entrar" style={{width: "100%", marginBottom: "1.8rem"}} $primary />
 
           <Link to="/signup">Cadastre-se</Link>
 
