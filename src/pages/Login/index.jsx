@@ -5,23 +5,20 @@ import {
   Content,
   Container,
   ImageLogin,
-  Title,
   ButtonGoogle,
   LogoGoogle,
-  FormLogin,
-  FormTitle,
-  FormControl,
-  FormLabel,
-  FormInput,
-  FormIcon,
-  ButtonEnter,
-  LinkRegister,
 } from "./styles";
+
+import { Form } from "../../components/Form";
+import { FormInput } from "../../components/FormInput";
+import { Button } from "../../components/Button";
 
 import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
 import imageIconClose from "../../assets/img/visibility-off.png";
 import imageIconOpen from "../../assets/img/visibility-on.png";
+
+import { Link } from "react-router-dom";
 
 window.gapi.load("client", initializeClient);
 
@@ -40,6 +37,7 @@ const tokenClient = window.google.accounts.oauth2.initTokenClient({
 export const Login = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
@@ -80,10 +78,10 @@ export const Login = () => {
   return (
 
     <Container>
-      <ImageLogin src={imageLogin} alt="Imagem Login" />
+      <ImageLogin src={imageLogin} alt="Imagem ilustrativa de Login" />
 
       <Content>
-        <Title>Entre no Orange Portfólio</Title>
+        <h1>Entre no Orange Portfólio</h1>
 
         <ButtonGoogle type="button" onClick={loginGoogle}>
           <LogoGoogle
@@ -95,44 +93,31 @@ export const Login = () => {
           Entrar com o Google
         </ButtonGoogle>
 
-        <FormLogin onSubmit={handleLogin}>
-          <FormTitle>Faça login com email</FormTitle>
-          <FormControl>
-            <FormInput
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder=" "
-            />
-            <FormLabel htmlFor="email">Email Address</FormLabel>
-          </FormControl>
+        <Form title="Faça login com email" onSubmit={handleLogin}>
+          <FormInput
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            label="Email Address"
+          />
 
-          <FormControl>
-            <FormInput
-              id="password"
-              name="password"
-              type={isOpen ? "text" : "password"}
-              autoComplete="current-password"
-              placeholder=" "
-            />
-            <FormLabel htmlFor="password">
-              Password
-            </FormLabel>
-            <FormIcon
-              src={isOpen ? imageIconClose : imageIconOpen}
-              title={isOpen ? "Esconder" : "Mostrar"}
-              onClick={handleClick}
-            />
-          </FormControl>
+          <FormInput
+            id="password"
+            name="password"
+            type={isOpen ? "text" : "password"}
+            autoComplete="current-password"
+            label="Password"
+            icon={isOpen ? imageIconOpen : imageIconClose}
+            onClick={handleClick}
+          />
 
-          <ButtonEnter type="submit">Entrar</ButtonEnter>
+          <Button type="submit" label="Entrar" style={{width: "100%", marginBottom: "1.8rem"}} $primary />
 
-          <LinkRegister href="#">Cadastro</LinkRegister>
+          <Link to="/signup">Cadastre-se</Link>
 
-        </FormLogin>
+        </Form>
       </Content>
     </Container>
-
   );
 };
