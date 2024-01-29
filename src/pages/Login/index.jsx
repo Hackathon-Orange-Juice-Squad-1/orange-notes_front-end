@@ -5,6 +5,7 @@ import {
   ButtonGoogle,
   LogoGoogle,
 } from "./styles";
+
 import { Form } from "../../components/Form";
 import { FormInput } from "../../components/FormInput";
 import { Button } from "../../components/Button";
@@ -13,7 +14,6 @@ import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
 import imageIconClose from "../../assets/img/visibility-off.png";
 import imageIconOpen from "../../assets/img/visibility-on.png";
-
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -92,6 +92,5 @@ export const Login = () => {
         </Form>
       </Content>
     </Container>
-
   );
 };
