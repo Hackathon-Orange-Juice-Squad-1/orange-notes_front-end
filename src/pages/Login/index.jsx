@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+
 import {
   Content,
   Container,
@@ -12,16 +15,13 @@ import {
   FormInput,
   FormIcon,
   ButtonEnter,
-  FormA,
+  LinkRegister,
 } from "./styles";
 
 import imageLogin from "../../assets/img/img-login.png";
 import logoGoogle from "../../assets/img/logo-google.png";
 import imageIconClose from "../../assets/img/visibility-off.png";
 import imageIconOpen from "../../assets/img/visibility-on.png";
-
-
-import { useState } from "react";
 
 window.gapi.load("client", initializeClient);
 
@@ -38,21 +38,44 @@ const tokenClient = window.google.accounts.oauth2.initTokenClient({
 });
 
 export const Login = () => {
-
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  { isOpen ? "Fechar" : "Abrir" }
-
   const loginGoogle = () => {
     tokenClient.callback = () => {
-      alert("Sucesso");
+      navigate('/');
     };
     tokenClient.requestAccessToken({ prompt: "consent" });
   };
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const { email, password } = event.currentTarget;
+
+    fetch('https://orange-notes-backend.onrender.com/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        if (body.token) {
+          localStorage.setItem('token', body.token)
+          navigate('/');
+        } else {
+          alert(`Erro: ${body.msg}`)
+        }
+      })
+  };
 
   return (
 
@@ -72,7 +95,7 @@ export const Login = () => {
           Entrar com o Google
         </ButtonGoogle>
 
-        <FormLogin>
+        <FormLogin onSubmit={handleLogin}>
           <FormTitle>Faça login com email</FormTitle>
           <FormControl>
             <FormInput
@@ -80,6 +103,7 @@ export const Login = () => {
               name="email"
               type="email"
               autoComplete="email"
+              placeholder=" "
             />
             <FormLabel htmlFor="email">Email Address</FormLabel>
           </FormControl>
@@ -90,6 +114,7 @@ export const Login = () => {
               name="password"
               type={isOpen ? "text" : "password"}
               autoComplete="current-password"
+              placeholder=" "
             />
             <FormLabel htmlFor="password">
               Password
@@ -101,9 +126,9 @@ export const Login = () => {
             />
           </FormControl>
 
-          <ButtonEnter>Entrar</ButtonEnter>
+          <ButtonEnter type="submit">Entrar</ButtonEnter>
 
-          <FormA><a href="#">Cadastro</a></FormA>
+          <LinkRegister href="#">Cadastro</LinkRegister>
 
         </FormLogin>
       </Content>
