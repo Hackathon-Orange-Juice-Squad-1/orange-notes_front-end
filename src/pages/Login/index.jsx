@@ -68,7 +68,7 @@ export const Login = () => {
       .then((body) => {
         if (body.token) {
           localStorage.setItem('token', body.token)
-          navigate('/');
+          navigate('/app');
         } else {
           alert(`Erro: ${body.msg}`)
         }
