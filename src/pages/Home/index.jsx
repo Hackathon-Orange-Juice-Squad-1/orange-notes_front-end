@@ -1,5 +1,7 @@
+import {jwtDecode} from "jwt-decode";
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
@@ -18,12 +20,27 @@ import { ModalSuccess } from "../../components/ModalSuccess";
 import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 
 export const Home = () => {
+    const navigate = useNavigate();
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
     const { success, toggleSuccessModal } = useToggleSuccessModal();
     const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
     const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
+    const token = localStorage.getItem('token'); 
+    const isTokenVerified = isTokenValid(token);
+    console.log(token); 
 
+    function isTokenValid(userToken) {
+        try {
+            jwtDecode(userToken)
+            return true;
+        } catch (err) {
+            // err
+            console.log(err);
+            return false;
+        }
+    }
+    
     const handleSaveClick = () => {
         toggleDeletion(false);
 
@@ -86,73 +103,76 @@ export const Home = () => {
     //     fileInput.click();
     // };
 
-
-    return (
-        <Container>
-            <Header />
-
-            <Main>
-                <Profile userName="Camila Soares" userCountry="Brasil" onClick={() => { toggleModal(); addModal(); }} />
-
-                <h2>Meus projetos</h2>
-
-                <Input type="text" label="Buscar tags" name="searchTags" />
-
-                <Projects>
-                    <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} handleDeleteClick={handleDeleteClick} />
-
-                    <BlankSpace />
-
-                    <BlankSpace />
-                </Projects>
-            </Main>
-
-            <Modal title={modalTitle} open={open}>
-                <div className="modal__form">
-                    <Input type="text" label="Título" name="title" />
-
-                    <Input type="text" label="Tags" name="tags" />
-
-                    <Input type="text" label="Link" name="link" />
-
-                    <Textarea label="Descrição" name="description" />
-                </div>
-
-                <div className="modal__file">
-                    <h3>Selecione o conteúdo que você deseja fazer upload</h3>
-
-                    <label htmlFor="upload">
-                        <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
-                        <input type="file" id="upload" style={{ display: "none" }} />
-                    </label>
-
-                    <button 
-                        className="preview" 
-                        style={{ margin: "1.6rem 0", background: "none", border: "none" }}
-                        onClick={handlePreviewClick}>
-                            Visualizar publicação
-                    </button>
-                    
-                    <div style={{ display: "flex", gap: "1.6rem" }}>
-                        <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
-                        <Button label="Cancelar" onClick={toggleModal} />
+    if (isTokenVerified) {
+        return (
+            <Container>
+                <Header />
+    
+                <Main>
+                    <Profile userName="Camila Soares" userCountry="Brasil" onClick={() => { toggleModal(); addModal(); }} />
+    
+                    <h2>Meus projetos</h2>
+    
+                    <Input type="text" label="Buscar tags" name="searchTags" />
+    
+                    <Projects>
+                        <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} handleDeleteClick={handleDeleteClick} />
+    
+                        <BlankSpace />
+    
+                        <BlankSpace />
+                    </Projects>
+                </Main>
+    
+                <Modal title={modalTitle} open={open}>
+                    <div className="modal__form">
+                        <Input type="text" label="Título" name="title" />
+    
+                        <Input type="text" label="Tags" name="tags" />
+    
+                        <Input type="text" label="Link" name="link" />
+    
+                        <Textarea label="Descrição" name="description" />
                     </div>
-                </div>
-            </Modal>
-
-            <ModalPreview 
-                title="Ecommerce One Page" 
-                image={thumbnail} 
-                description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
-                link="https://gumroad.com/products/wxCSL"
-                onClick={handleClosePreviewClick}
-                preview={preview}>
-
-            </ModalPreview>
-
-            <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />
-
-            <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={handleConfirmDeleteClick} handleCancelDeleteClick={handleCancelDeleteClick} />
-        </Container>
-    );
+    
+                    <div className="modal__file">
+                        <h3>Selecione o conteúdo que você deseja fazer upload</h3>
+    
+                        <label htmlFor="upload">
+                            <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
+                            <input type="file" id="upload" style={{ display: "none" }} />
+                        </label>
+    
+                        <button
+                            className="preview"
+                            style={{ margin: "1.6rem 0", background: "none", border: "none" }}
+                            onClick={handlePreviewClick}>
+                            Visualizar publicação
+                        </button>
+    
+                        <div style={{ display: "flex", gap: "1.6rem" }}>
+                            <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
+                            <Button label="Cancelar" onClick={toggleModal} />
+                        </div>
+                    </div>
+                </Modal>
+    
+                <ModalPreview
+                    title="Ecommerce One Page"
+                    image={thumbnail}
+                    description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
+                    link="https://gumroad.com/products/wxCSL"
+                    onClick={handleClosePreviewClick}
+                    preview={preview}>
+    
+                </ModalPreview>
+    
+                <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />
+    
+                <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={handleConfirmDeleteClick} handleCancelDeleteClick={handleCancelDeleteClick} />
+            </Container>
+        );
+    } else {
+        navigate('/login');
+    };
 };
