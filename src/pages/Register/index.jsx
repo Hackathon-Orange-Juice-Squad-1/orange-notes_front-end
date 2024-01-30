@@ -10,6 +10,7 @@ import {
 import { Form } from "../../components/Form";
 import { FormInput } from "../../components/FormInput";
 import { Button } from "../../components/Button";
+import { ModalConfirmRegister } from '../../components/ModalConfirmRegister';
 
 import imageRegister from "../../assets/img/img_cadastro-3x.png";
 import imageIconClose from "../../assets/img/visibility-off.png";
@@ -117,6 +118,8 @@ export const Register = () => {
 
                     <Button type="submit" label="Cadastrar" style={{ width: "100%", marginBottom: "1.8rem" }} $primary />
                 </Form>
+
+                <ModalConfirmRegister open={true} />
             </Content>
         </Container>
     );
