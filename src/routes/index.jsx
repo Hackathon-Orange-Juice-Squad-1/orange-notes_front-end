@@ -1,26 +1,14 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import {jwtDecode} from "jwt-decode";
+import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 
 import { AppRoutes } from './app.routes';
 import { AuthRoutes } from './auth.routes';
 
 export function Routes() {
-    let token = localStorage.getItem('token');
-    // let token = "dsahkjdhasjkdsa";  
-    const isTokenVerified = isTokenValid(token);
+    const { isLoggedIn } = useIsLoggedIn();
 
-    function isTokenValid(userToken) {
-        try {
-            jwtDecode(userToken)
-            return true;
-        } catch (err) {
-            console.log(err);
-            return false;
-        }
-    }
-
-    if (isTokenVerified) {
+    if (isLoggedIn) {
         return (
             <BrowserRouter>
                 <AppRoutes />
