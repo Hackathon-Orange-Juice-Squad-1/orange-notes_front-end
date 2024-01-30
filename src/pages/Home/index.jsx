@@ -1,7 +1,6 @@
 // import { jwtDecode } from "jwt-decode";
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";

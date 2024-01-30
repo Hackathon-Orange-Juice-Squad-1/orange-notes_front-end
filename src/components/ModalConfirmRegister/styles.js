@@ -11,10 +11,22 @@ const modalOpenAnimation = keyframes`
 		opacity: 0;
 	}
 
-    100% {
+    25% {
         transform: translate3d(0, 0, 0);
         transform-origin: 0% 0%;
         opacity: 1;
+    }
+
+    75% {
+        transform: translate3d(0, 0, 0);
+        transform-origin: 0% 0%;
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate3d(0, -100px, 0);
+        transform-origin: 0% 0%;
+        opacity: 0;
     }
 `;
 
@@ -42,7 +54,8 @@ export const ModalBody = styled.div`
     padding: 1.5rem 1.6rem;
     border-radius: 4px;
 
-    animation: ${modalOpenAnimation} .5s ease-in-out;
+    animation: ${modalOpenAnimation} 3s ease-in-out;
+    animation-fill-mode: forwards;
 
     @media (min-width: 425px) {
         max-width: 32rem;

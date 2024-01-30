@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import { useToggleModal } from '../../hooks/useToggleModal';
 
 import {
     Content,
@@ -25,8 +25,8 @@ import imageIconOpen from "../../assets/img/visibility-on.png";
 // });
 
 export const Register = () => {
-    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const { open, toggleModal } = useToggleModal();
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -116,10 +116,16 @@ export const Register = () => {
                         onClick={handleClick}
                     />
 
-                    <Button type="submit" label="Cadastrar" style={{ width: "100%", marginBottom: "1.8rem" }} $primary />
+                    <Button 
+                        type="submit" 
+                        label="Cadastrar" 
+                        style={{ width: "100%", marginBottom: "1.8rem" }} 
+                        onClick={toggleModal}
+                        $primary 
+                    />
                 </Form>
 
-                <ModalConfirmRegister open={true} />
+                <ModalConfirmRegister open={open} />
             </Content>
         </Container>
     );
