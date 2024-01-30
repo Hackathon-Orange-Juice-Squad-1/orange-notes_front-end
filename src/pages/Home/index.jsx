@@ -1,4 +1,3 @@
-// import { jwtDecode } from "jwt-decode";
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import React, { useState } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
@@ -64,6 +63,19 @@ export const Home = () => {
     const handleCancelDeleteClick = () => {
         toggleConfirmDeleteModal();
     };
+
+    const handleCancelAddClick = () => {
+        if (edit) {
+            toggleModal();
+        } else {
+            if (userHasProjects) {
+                toggleUserHasProjects();
+                toggleModal();
+            } else {
+                toggleModal();
+            }
+        }
+    }
 
     const [edit, toggleEdit] = useState(false);
     const [deletion, toggleDeletion] = useState(false);
@@ -135,7 +147,7 @@ export const Home = () => {
 
                     <div style={{ display: "flex", gap: "1.6rem" }}>
                         <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
-                        <Button label="Cancelar" onClick={toggleModal} />
+                        <Button label="Cancelar" onClick={handleCancelAddClick} />
                     </div>
                 </div>
             </Modal>

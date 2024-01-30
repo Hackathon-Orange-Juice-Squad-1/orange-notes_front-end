@@ -2,12 +2,12 @@ import { BrowserRouter } from 'react-router-dom';
 
 import {jwtDecode} from "jwt-decode";
 
-import { AppRoutes as AppRoutesComponent } from './app.routes';
-import { AuthRoutes as AuthRoutesComponent } from './auth.routes';
+import { AppRoutes } from './app.routes';
+import { AuthRoutes } from './auth.routes';
 
-export function AppRoutes() {
-    // let token = localStorage.getItem('token');
-    let token = "dsahkjdhasjkdsa";  
+export function Routes() {
+    let token = localStorage.getItem('token');
+    // let token = "dsahkjdhasjkdsa";  
     const isTokenVerified = isTokenValid(token);
 
     function isTokenValid(userToken) {
@@ -23,13 +23,13 @@ export function AppRoutes() {
     if (isTokenVerified) {
         return (
             <BrowserRouter>
-                <AppRoutesComponent />
+                <AppRoutes />
             </BrowserRouter>
         );
     } else {
         return (
             <BrowserRouter>
-                <AuthRoutesComponent />
+                <AuthRoutes />
             </BrowserRouter>
         );
     };
