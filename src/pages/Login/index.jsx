@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+
+import { auth, googleProvider } from '../../services/firebase';
 
 import {
   Content,
@@ -20,33 +21,19 @@ import imageIconOpen from "../../assets/img/visibility-on.png";
 
 import { Link } from "react-router-dom";
 
-window.gapi.load("client", initializeClient);
-
-function initializeClient() {
-  return window.gapi.client.init({
-    apiKey: "AIzaSyCvLFxzKada0JdUrZ3Hm3Yz35bVlZ4oan0",
-  });
-}
-
-const tokenClient = window.google.accounts.oauth2.initTokenClient({
-  client_id: "1095567261898-6eop9ig5u5fh70e5dqqan0empoiflbad",
-  scope: "https://www.googleapis.com/auth/userinfo.email",
-  callback: "",
-});
-
 export const Login = () => {
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const loginGoogle = () => {
-    tokenClient.callback = () => {
-      navigate('/');
-    };
-    tokenClient.requestAccessToken({ prompt: "consent" });
+  const handleGoogleLogin = async () => {
+    const result = await auth.signInWithPopup(googleProvider);
+    const googleToken = result.credential.accessToken;
+    localStorage.setItem('google_login_token', googleToken);
+
+    console.log(result);
   };
 
   const handleLogin = (event) => {
@@ -68,7 +55,6 @@ export const Login = () => {
       .then((body) => {
         if (body.token) {
           localStorage.setItem('token', body.token)
-          navigate('/app');
         } else {
           alert(`Erro: ${body.msg}`)
         }
@@ -83,7 +69,7 @@ export const Login = () => {
       <Content>
         <h1>Entre no Orange Portfólio</h1>
 
-        <ButtonGoogle type="button" onClick={loginGoogle}>
+        <ButtonGoogle type="button" onClick={handleGoogleLogin}>
           <LogoGoogle
             src={logoGoogle}
             alt="Logo Google"
