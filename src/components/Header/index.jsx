@@ -7,6 +7,10 @@ import { Container, Nav, NavLinks, NavProfile, HamburgerButton } from "./styles"
 export const Header = () => {
     const [isActive, setIsActive] = useState(false);
     const ToggleIsActive = () => setIsActive(!isActive);
+    const handleLogout = () => {
+        localStorage.clear();
+        location.reload();
+    };
 
     return (
         <Container>
@@ -35,7 +39,7 @@ export const Header = () => {
 
                 <NavProfile>
                     <li>
-                        <a href="/" onClick={() => storage.clear()}>
+                        <a href="/" onClick={handleLogout}>
                             <img src={avatar} alt="Avatar de usuário" />
                         </a>
                     </li>
