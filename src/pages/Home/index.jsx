@@ -111,7 +111,14 @@ export const Home = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject onClick={() => { toggleModal(); addModal(); }} userHasProjects={userHasProjects} toggleUserHasProjects={toggleUserHasProjects} editModal={editModal} toggleModal={toggleModal} handleDeleteClick={handleDeleteClick} />
+                    <ButtonAddProject 
+                        onClick={() => { toggleModal(); addModal(); }} 
+                        userHasProjects={userHasProjects} 
+                        toggleUserHasProjects={toggleUserHasProjects} 
+                        editModal={editModal} 
+                        toggleModal={toggleModal} 
+                        handleDeleteClick={handleDeleteClick} 
+                    />
 
                     <BlankSpace />
 
