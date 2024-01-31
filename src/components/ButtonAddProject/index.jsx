@@ -16,11 +16,6 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, toggleUs
         toggleModal();
     }
 
-    // const handleDeleteClick = () => {
-    //     toggleUserHasProjects();
-    //     ToggleIsActive();
-    // }
-
     const handleClickOutside = (event) => {
         if (navRef.current && !navRef.current.contains(event.target)) {
             setIsActive(false);
