@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo-orange-3x.png";
 import avatar from "../../assets/img/avatar-2x.png";
 import { FaBell } from "react-icons/fa6";
@@ -25,11 +26,11 @@ export const Header = () => {
             <Nav> 
                 <NavLinks className={isActive ? "menuOpen" : "menuClosed"}>
                     <li>
-                        <a href="/">Meus projetos</a>
+                        <Link to="/">Meus projetos</Link>
                     </li>
 
                     <li>
-                        <a href="/">Descobrir</a>
+                        <Link to="/discover">Descobrir</Link>
                     </li>
 
                     <li>
