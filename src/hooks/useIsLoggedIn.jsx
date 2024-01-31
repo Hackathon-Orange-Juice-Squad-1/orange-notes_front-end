@@ -3,10 +3,10 @@ import {jwtDecode} from "jwt-decode";
 
 export const useIsLoggedIn = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // let token = localStorage.getItem('token');
-    // let storedToken = localStorage.getItem('google_login_token');
-    let token = "dsahkjdhasjkdsa";  
-    let storedToken = null;  
+    let token = localStorage.getItem('token');
+    let storedToken = localStorage.getItem('google_login_token');
+    // let token = "dsahkjdhasjkdsa";  
+    // let storedToken = null;  
 
     useEffect(() => {
         const isTokenVerified = isTokenValid(token) || isGoogleTokenValid(storedToken);

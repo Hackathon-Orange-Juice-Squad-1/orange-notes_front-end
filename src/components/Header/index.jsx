@@ -35,7 +35,7 @@ export const Header = () => {
 
                 <NavProfile>
                     <li>
-                        <a href="/">
+                        <a href="/" onClick={() => storage.clear()}>
                             <img src={avatar} alt="Avatar de usuário" />
                         </a>
                     </li>

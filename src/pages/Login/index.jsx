@@ -55,6 +55,7 @@ export const Login = () => {
       .then((body) => {
         if (body.token) {
           localStorage.setItem('token', body.token)
+          location.reload()
         } else {
           alert(`Erro: ${body.msg}`)
         }
@@ -69,7 +70,8 @@ export const Login = () => {
       <Content>
         <h1>Entre no Orange Portfólio</h1>
 
-        <ButtonGoogle type="button" onClick={handleGoogleLogin}>
+        <ButtonGoogle type="button" onClick={async () => {await handleGoogleLogin(); location.reload();
+}}>
           <LogoGoogle
             src={logoGoogle}
             alt="Logo Google"
