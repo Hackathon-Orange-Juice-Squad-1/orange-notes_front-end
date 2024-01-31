@@ -1,15 +1,24 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import { AppRoutes as AppRoutesComponent } from './app.routes';
-import { AuthRoutes as AuthRoutesComponent } from './auth.routes';
+import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 
-export function AppRoutes() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<AuthRoutesComponent />} />
-                <Route path="/app" element={<AppRoutesComponent />} />
-            </Routes>
-        </BrowserRouter>
-    );
+import { AppRoutes } from './app.routes';
+import { AuthRoutes } from './auth.routes';
+
+export function Routes() {
+    const { isLoggedIn } = useIsLoggedIn();
+
+    if (isLoggedIn) {
+        return (
+            <BrowserRouter>
+                <AppRoutes />
+            </BrowserRouter>
+        );
+    } else {
+        return (
+            <BrowserRouter>
+                <AuthRoutes />
+            </BrowserRouter>
+        );
+    };
 };
