@@ -8,4 +8,4 @@ export function AppRoutes() {
             <Route path="/" element={ <Home /> } />
         </Routes>
     );
-};
+}

@@ -114,7 +114,7 @@ export const Login = () => {
 
           <Button type="submit" label="Entrar" style={{width: "100%", marginBottom: "1.8rem"}} $primary />
 
-          <Link to="/signup">Cadastre-se</Link>
+          <Link to="/register">Cadastre-se</Link>
 
         </Form>
       </Content>

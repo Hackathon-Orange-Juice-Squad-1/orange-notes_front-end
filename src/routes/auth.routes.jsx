@@ -8,4 +8,4 @@ export function AuthRoutes() {
             <Route path="/" element={ <Login /> } />
         </Routes>
     );
-};
+}

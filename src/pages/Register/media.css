@@ -15,7 +15,7 @@
         color: #222244;
     }
 
-    form {
+    .container-form {
         width: 50%;
         height: 80vh;
         margin: auto;
@@ -36,7 +36,7 @@
         position: relative;
     }
 
-    form > button {
+    .container-form > button {
         width: 100%;
         height: 60px;
         border: 0px;
@@ -49,7 +49,7 @@
         margin-left: auto;
         margin-right: auto;
         cursor: pointer;
-
+        font-family: 'Roboto';
     }
     .input-class-grid {
         display: grid;

@@ -132,7 +132,7 @@ export const Register = () => {
       <ToastContainer />
       <div>
         <img src={bottom} id="register" />
-        <form>
+        <div className="container-form">
           <h1>Cadastre-se</h1>
           <div className="container">
             <div className="input-class-grid">
@@ -161,7 +161,7 @@ export const Register = () => {
             </div>
           </div>
           <button className="btn-register" onClick={salveOrReplace}><a>Cadastrar</a></button>
-        </form>
+        </div>
         <script src="main.js"></script>
       </div>
     </>
