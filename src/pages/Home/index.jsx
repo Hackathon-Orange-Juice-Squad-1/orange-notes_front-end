@@ -1,5 +1,5 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
@@ -18,6 +18,25 @@ import { ModalSuccess } from "../../components/ModalSuccess";
 import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 
 export const Home = () => {
+    const [previewTitleValue, setPreviewTitleValue] = useState("");
+    const previousPreviewTitleValue = useRef("");
+    const [previewDescriptionValue, setPreviewDescriptionValue] = useState("");
+    const previousPreviewDescriptionValue = useRef("");
+    const [previewLinkValue, setPreviewLinkValue] = useState("");
+    const previousPreviewLinkValue = useRef("");
+  
+    useEffect(() => {
+      previousPreviewTitleValue.current = previewTitleValue;
+    }, [previewTitleValue]);
+
+    useEffect(() => {
+      previousPreviewDescriptionValue.current = previewDescriptionValue;
+    }, [previewDescriptionValue]);
+
+    useEffect(() => {
+        previousPreviewLinkValue.current = previewLinkValue;
+      }, [previewLinkValue]);
+
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
     const { success, toggleSuccessModal } = useToggleSuccessModal();
@@ -128,13 +147,33 @@ export const Home = () => {
 
             <Modal title={modalTitle} open={open}>
                 <div className="modal__form">
-                    <Input type="text" label="Título" name="title" />
+                    <Input 
+                        type="text" 
+                        label="Título" 
+                        name="title" 
+                        ref={previousPreviewTitleValue} 
+                        value={previewTitleValue}
+                        onChange={(e) => setPreviewTitleValue(e.target.value)}
+                    />
 
                     <Input type="text" label="Tags" name="tags" />
 
-                    <Input type="text" label="Link" name="link" />
+                    <Input 
+                        type="text" 
+                        label="Link" 
+                        name="link" 
+                        ref={previousPreviewLinkValue} 
+                        value={previewLinkValue}
+                        onChange={(e) => setPreviewLinkValue(e.target.value)}
+                    />
 
-                    <Textarea label="Descrição" name="description" />
+                    <Textarea 
+                        label="Descrição" 
+                        name="description" 
+                        ref={previousPreviewDescriptionValue} 
+                        value={previewDescriptionValue}
+                        onChange={(e) => setPreviewDescriptionValue(e.target.value)}
+                    />
                 </div>
 
                 <div className="modal__file">
@@ -160,10 +199,10 @@ export const Home = () => {
             </Modal>
 
             <ModalPreview
-                title="Ecommerce One Page"
+                title={previewTitleValue}
                 image={thumbnail}
-                description="Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce."
-                link="https://gumroad.com/products/wxCSL"
+                description={previewDescriptionValue}
+                link={previewLinkValue}
                 onClick={handleClosePreviewClick}
                 preview={preview}>
 

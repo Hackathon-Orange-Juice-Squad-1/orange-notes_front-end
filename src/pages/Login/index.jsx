@@ -32,8 +32,6 @@ export const Login = () => {
     const result = await auth.signInWithPopup(googleProvider);
     const googleToken = result.credential.accessToken;
     localStorage.setItem('google_login_token', googleToken);
-
-    console.log(result);
   };
 
   const handleLogin = (event) => {
