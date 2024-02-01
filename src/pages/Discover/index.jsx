@@ -5,12 +5,22 @@ import { ProfileSmall } from "../../components/ProfileSmall";
 import projectBiancaG from "../../assets/img/projectBiancaG.png"
 import avatarBianca from "../../assets/img/avatarBianca.png"
 import { ModalPreview } from "../../components/ModalPreview";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export const Discover = () => {
 
     const [isOpenModal, setOpenModal] = useState(false);
+
+    const [projectList, setProjectList] = useState([]);
+
+    useEffect(() => {
+        fetch(' https://orange-notes-backend.onrender.com/projetos/all')
+            .then((response) => response.json())
+            .then((data) => setProjectList(data));
+    }, [])
+
+
 
     return (
         <Container>
@@ -24,13 +34,15 @@ export const Discover = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <Thumbnail onClick={() => setOpenModal(true)}>
-                        <img src={projectBiancaG} alt="Thumbnail de preview do projeto" />
+                    {projectList.map((project) => (
+                        <Thumbnail key={project._id} onClick={() => setOpenModal(true)}>
+                            <img src={project.image.url} alt="Thumbnail de preview do projeto" />
 
-                        <div>
-                            <ProfileSmall avatar={avatarBianca} userName="Bianca Martin" index="02/24" className="on-thumb" />
-                        </div>
-                    </Thumbnail>
+                            <div>
+                                <ProfileSmall avatar={avatarBianca} userName={project.userName} index={project.dataCriacao} className="on-thumb" />
+                            </div>
+                        </Thumbnail>
+                    ))}
                     <div>
                         <ModalPreview
                             avatar={avatarBianca}
