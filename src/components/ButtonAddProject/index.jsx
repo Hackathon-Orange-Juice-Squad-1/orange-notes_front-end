@@ -1,4 +1,4 @@
-import thumbnail from "../../assets/img/img_landingpage-3x.png"
+// import thumbnail from "../../assets/img/img_landingpage-3x.png"
 import iconEdit from "../../assets/img/icon_edit.svg";
 import React, { useState, useRef, useEffect } from "react";
 import { FaImages } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
-export const ButtonAddProject = ({ onClick, className, userHasProjects, editModal, toggleModal, handleDeleteClick }) => {
+export const ButtonAddProject = ({ onClick, className, userHasProjects, editModal, toggleModal, handleDeleteClick, thumb, tags = [], userName }) => {
     const [isActive, setIsActive] = useState(false);
     const navRef = useRef();
     const ToggleIsActive = () => setIsActive(!isActive);
@@ -42,18 +42,19 @@ export const ButtonAddProject = ({ onClick, className, userHasProjects, editModa
     } else {
         return (
             <Thumbnail>
-                <img src={thumbnail} alt="Thumbnail de preview do projeto" />
+                <img src={thumb} alt="Thumbnail de preview do projeto" />
 
                 <button className={className} onClick={ToggleIsActive}>
                     <img src={iconEdit} alt="Ícone de edição" />
                 </button>
 
                 <div className={className}>
-                    <ProfileSmall userName="Camila Soares" index="12/12" className="on-thumb" />
+                    <ProfileSmall userName={userName} index="12/12" className="on-thumb" />
 
                     <ul>
-                        <Tag tag="UX" />
-                        <Tag tag="Web" />
+                        {tags.map((tag, index) => (
+                            <Tag key={index + tag} tag={tag} />
+                        ))}
                     </ul>
                 </div>
 

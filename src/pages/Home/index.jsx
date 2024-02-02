@@ -1,4 +1,5 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
+import { getUserProjects } from "../../services/getUserProjects";
 import React, { useState, useRef, useEffect } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
@@ -18,30 +19,46 @@ import { ModalSuccess } from "../../components/ModalSuccess";
 import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 
 export const Home = () => {
+    const { open, toggleModal } = useToggleModal();
+    const { preview, togglePreview } = useTogglePreview();
+    const { success, toggleSuccessModal } = useToggleSuccessModal();
+    const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
+    const { userHasProjects, setUserHasProjects, toggleUserHasProjects, checkUserProjects } = useToggleUserHasProjects();
+
+    useEffect(() => {
+        checkUserProjects().then((response) => {
+            setUserHasProjects(response);
+            console.log(userHasProjects);
+        });
+    }, []);
+
+    let [projects, setProjects] = useState([]);
+    useEffect(() => {
+        getUserProjects().then((response) => {
+            setProjects(response);
+        });
+    }, []);
+
+    console.log(projects);
+
     const [previewTitleValue, setPreviewTitleValue] = useState("");
     const previousPreviewTitleValue = useRef("");
     const [previewDescriptionValue, setPreviewDescriptionValue] = useState("");
     const previousPreviewDescriptionValue = useRef("");
     const [previewLinkValue, setPreviewLinkValue] = useState("");
     const previousPreviewLinkValue = useRef("");
-  
+
     useEffect(() => {
-      previousPreviewTitleValue.current = previewTitleValue;
+        previousPreviewTitleValue.current = previewTitleValue;
     }, [previewTitleValue]);
 
     useEffect(() => {
-      previousPreviewDescriptionValue.current = previewDescriptionValue;
+        previousPreviewDescriptionValue.current = previewDescriptionValue;
     }, [previewDescriptionValue]);
 
     useEffect(() => {
         previousPreviewLinkValue.current = previewLinkValue;
-      }, [previewLinkValue]);
-
-    const { open, toggleModal } = useToggleModal();
-    const { preview, togglePreview } = useTogglePreview();
-    const { success, toggleSuccessModal } = useToggleSuccessModal();
-    const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
-    const { userHasProjects, toggleUserHasProjects } = useToggleUserHasProjects();
+    }, [previewLinkValue]);
 
     const handleSaveClick = () => {
         toggleDeletion(false);
@@ -130,13 +147,13 @@ export const Home = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject 
-                        onClick={() => { toggleModal(); addModal(); }} 
-                        userHasProjects={userHasProjects} 
-                        toggleUserHasProjects={toggleUserHasProjects} 
-                        editModal={editModal} 
-                        toggleModal={toggleModal} 
-                        handleDeleteClick={handleDeleteClick} 
+                    <ButtonAddProject
+                        onClick={() => { toggleModal(); addModal(); }}
+                        userHasProjects={userHasProjects}
+                        toggleUserHasProjects={toggleUserHasProjects}
+                        editModal={editModal}
+                        toggleModal={toggleModal}
+                        handleDeleteClick={handleDeleteClick}
                     />
 
                     <BlankSpace />
@@ -147,30 +164,30 @@ export const Home = () => {
 
             <Modal title={modalTitle} open={open}>
                 <div className="modal__form">
-                    <Input 
-                        type="text" 
-                        label="Título" 
-                        name="title" 
-                        ref={previousPreviewTitleValue} 
+                    <Input
+                        type="text"
+                        label="Título"
+                        name="title"
+                        ref={previousPreviewTitleValue}
                         value={previewTitleValue}
                         onChange={(e) => setPreviewTitleValue(e.target.value)}
                     />
 
                     <Input type="text" label="Tags" name="tags" />
 
-                    <Input 
-                        type="text" 
-                        label="Link" 
-                        name="link" 
-                        ref={previousPreviewLinkValue} 
+                    <Input
+                        type="text"
+                        label="Link"
+                        name="link"
+                        ref={previousPreviewLinkValue}
                         value={previewLinkValue}
                         onChange={(e) => setPreviewLinkValue(e.target.value)}
                     />
 
-                    <Textarea 
-                        label="Descrição" 
-                        name="description" 
-                        ref={previousPreviewDescriptionValue} 
+                    <Textarea
+                        label="Descrição"
+                        name="description"
+                        ref={previousPreviewDescriptionValue}
                         value={previewDescriptionValue}
                         onChange={(e) => setPreviewDescriptionValue(e.target.value)}
                     />
@@ -179,10 +196,22 @@ export const Home = () => {
                 <div className="modal__file">
                     <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
-                    <label htmlFor="upload">
-                        <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
-                        <input type="file" id="upload" style={{ display: "none" }} />
-                    </label>
+                    {userHasProjects ?
+                        projects.map(project => {
+                            return (
+                                <ButtonAddProject 
+                                    key={project._id} 
+                                    userName="Camila Soares"
+                                    tags={project.tags}
+                                    thumb={project.image.url}
+                                />
+                            )
+                        })
+                        : <label htmlFor="upload">
+                            <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
+                            <input type="file" id="upload" style={{ display: "none" }} />
+                        </label>}
+
 
                     <button
                         className="preview"

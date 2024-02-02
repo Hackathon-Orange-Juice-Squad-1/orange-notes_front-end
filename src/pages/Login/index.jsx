@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { auth, googleProvider } from '../../services/firebase';
+import { handleLogin } from '../../services/loginAuthService';
 
 import {
   Content,
@@ -30,34 +31,19 @@ export const Login = () => {
 
   const handleGoogleLogin = async () => {
     const result = await auth.signInWithPopup(googleProvider);
-    const googleToken = result.credential.accessToken;
+    console.log(result);
+    const googleToken = result.user.uid;
     localStorage.setItem('google_login_token', googleToken);
   };
 
-  const handleLogin = (event) => {
+  const login = (event) => {
     event.preventDefault();
 
     const { email, password } = event.currentTarget;
 
-    fetch('https://orange-notes-backend.onrender.com/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      .then((response) => response.json())
-      .then((body) => {
-        if (body.token) {
-          localStorage.setItem('token', body.token)
-          location.reload()
-        } else {
-          alert(`Erro: ${body.msg}`)
-        }
-      })
+    handleLogin(email.value, password.value)
+        .then(() => location.reload())
+        .catch(error => alert(error.message));
   };
 
   return (
@@ -68,8 +54,7 @@ export const Login = () => {
       <Content>
         <h1>Entre no Orange Portfólio</h1>
 
-        <ButtonGoogle type="button" onClick={async () => {await handleGoogleLogin(); location.reload();
-}}>
+        <ButtonGoogle type="button" onClick={async () => {await handleGoogleLogin(); location.reload();}}>
           <LogoGoogle
             src={logoGoogle}
             alt="Logo Google"
@@ -79,7 +64,7 @@ export const Login = () => {
           Entrar com o Google
         </ButtonGoogle>
 
-        <Form title="Faça login com email" onSubmit={handleLogin}>
+        <Form title="Faça login com email" onSubmit={login}>
           <FormInput
             id="email"
             name="email"
