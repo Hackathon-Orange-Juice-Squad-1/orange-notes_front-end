@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo-orange-3x.png";
 import avatar from "../../assets/img/avatar-2x.png";
 import { FaBell } from "react-icons/fa6";
-import { Container, Nav, NavLinks, NavProfile, HamburgerButton } from "./styles";
+import { Container, Nav, NavLinks, NavProfile, NavModal, HamburgerButton } from "./styles";
 
 export const Header = () => {
     const [isActive, setIsActive] = useState(false);
+    const [isAvatarActive, setIsAvatarActive] = useState(false);
+    const navRef = useRef();
+
     const ToggleIsActive = () => setIsActive(!isActive);
     const handleLogout = () => {
         localStorage.clear();
         location.reload();
     };
+
+    const ToggleIsAvatarActive = () => setIsAvatarActive(!isAvatarActive);
+
+    const handleClickOutside = (event) => {
+        if (navRef.current && !navRef.current.contains(event.target)) {
+            setIsAvatarActive(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
 
     return (
         <Container>
@@ -23,7 +42,7 @@ export const Header = () => {
                 <img src={logo} alt="Logo da aplicação Orange Portfolio" />
             </a>
 
-            <Nav> 
+            <Nav>
                 <NavLinks className={isActive ? "menuOpen" : "menuClosed"}>
                     <li>
                         <Link to="/">Meus projetos</Link>
@@ -40,7 +59,7 @@ export const Header = () => {
 
                 <NavProfile>
                     <li>
-                        <a href="/" onClick={handleLogout}>
+                        <a onClick={ToggleIsAvatarActive}>
                             <img src={avatar} alt="Avatar de usuário" />
                         </a>
                     </li>
@@ -50,6 +69,15 @@ export const Header = () => {
                             <FaBell />
                         </a>
                     </li>
+
+                    <NavModal ref={navRef} className={isAvatarActive ? "navOpen" : "navClosed"}>
+                        <div className="arrow-up"></div>
+
+                        <ul>
+                            <li><button>Editar perfil</button></li>
+                            <li><button onClick={handleLogout}>Logout</button></li>
+                        </ul>
+                    </NavModal>
                 </NavProfile>
             </Nav>
         </Container>
