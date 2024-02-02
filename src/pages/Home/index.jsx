@@ -29,11 +29,10 @@ export const Home = () => {
     useEffect(() => {
         checkUserProjects().then((response) => {
             setUserHasProjects(response);
-            console.log(userHasProjects);
         });
     }, []);
 
-    let [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([]);
     useEffect(() => {
         getUserProjects().then((response) => {
             setProjects(response);
