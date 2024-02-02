@@ -158,7 +158,7 @@ export const Home = () => {
                                 />
                             )
                         })
-                        : <div>
+                        : <div className="no-projects">
                             <ButtonAddProject
                                 onClick={() => { toggleModal(); addModal(); }}
                                 userHasProjects={userHasProjects}
