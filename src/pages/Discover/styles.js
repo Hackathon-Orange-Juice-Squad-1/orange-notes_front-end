@@ -38,7 +38,7 @@ export const Title = styled.div`
   justify-content: center;
 `;
 
-export const Thumbnail = styled.div`
+export const Thumbnail = styled.li`
   position: relative;
   cursor: pointer;
 
@@ -209,14 +209,16 @@ export const Main = styled.main`
   }
 `;
 
-export const Projects = styled.div`
+export const Projects = styled.ul`
   margin-bottom: 77px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.4rem;
 
   @media (min-width: 425px) {
     max-width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 2.4rem;
+    
     /* margin-top: 4rem; */
   }
 `;
