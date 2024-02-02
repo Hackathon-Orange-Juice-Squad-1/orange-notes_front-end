@@ -147,18 +147,31 @@ export const Home = () => {
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
                 <Projects>
-                    <ButtonAddProject
-                        onClick={() => { toggleModal(); addModal(); }}
-                        userHasProjects={userHasProjects}
-                        toggleUserHasProjects={toggleUserHasProjects}
-                        editModal={editModal}
-                        toggleModal={toggleModal}
-                        handleDeleteClick={handleDeleteClick}
-                    />
+                    {userHasProjects ?
+                        projects.map(project => {
+                            return (
+                                <ButtonAddProject
+                                    key={project._id}
+                                    userName="Camila Soares"
+                                    tags={project.tags}
+                                    thumb={project.image.url}
+                                />
+                            )
+                        })
+                        : <div>
+                            <ButtonAddProject
+                                onClick={() => { toggleModal(); addModal(); }}
+                                userHasProjects={userHasProjects}
+                                toggleUserHasProjects={toggleUserHasProjects}
+                                editModal={editModal}
+                                toggleModal={toggleModal}
+                                handleDeleteClick={handleDeleteClick}
+                            />
 
-                    <BlankSpace />
+                            <BlankSpace />
 
-                    <BlankSpace />
+                            <BlankSpace />
+                        </div>}
                 </Projects>
             </Main>
 
@@ -196,21 +209,10 @@ export const Home = () => {
                 <div className="modal__file">
                     <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
-                    {userHasProjects ?
-                        projects.map(project => {
-                            return (
-                                <ButtonAddProject 
-                                    key={project._id} 
-                                    userName="Camila Soares"
-                                    tags={project.tags}
-                                    thumb={project.image.url}
-                                />
-                            )
-                        })
-                        : <label htmlFor="upload">
-                            <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
-                            <input type="file" id="upload" style={{ display: "none" }} />
-                        </label>}
+                    <label htmlFor="upload">
+                        <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
+                        <input type="file" id="upload" style={{ display: "none" }} />
+                    </label>
 
 
                     <button
