@@ -1,12 +1,14 @@
 // import thumbnail from "../../assets/img/img_landingpage-3x.png"
 import iconEdit from "../../assets/img/icon_edit.svg";
 import React, { useState, useRef, useEffect } from "react";
+import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
 import { FaImages } from "react-icons/fa";
 import { Container, Thumbnail, Nav } from "./styles";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 
-export const ButtonAddProject = ({ onClick, className, userHasProjects, editModal, toggleModal, handleDeleteClick, thumb, tags = [], userName }) => {
+export const ButtonAddProject = ({ onClick, className, editModal, toggleModal, handleDeleteClick, thumb, tags = [], userName }) => {
+    const { userHasProjects } = useToggleUserHasProjects();
     const [isActive, setIsActive] = useState(false);
     const navRef = useRef();
     const ToggleIsActive = () => setIsActive(!isActive);
