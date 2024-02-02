@@ -1,16 +1,18 @@
-import { ButtonEditProject } from "../ButtonEditProject"; 
-import { Container } from "./styles";
+import { ButtonEditProject } from "../ButtonEditProject";
+import { ProfileSmall } from "../ProfileSmall";
+import { Tag } from "../Tag";
+import { Container, ThumbWrapper, UserInfo } from "./styles";
 
-export const ProjectThumbnail = ({ onClick, className, editModal, toggleModal, handleDeleteClick, thumb, tags = [], userName }) => {
+export const ProjectThumbnail = ({ className, thumb, tags = [], userName }) => {
     return (
         <Container>
-            <img src={thumb} alt="Thumbnail de preview do projeto" />
+            <ThumbWrapper>
+                <img src={thumb} alt="Thumbnail de preview do projeto" />
 
-            <button className={className} onClick={ToggleIsActive}>
-                <img src={iconEdit} alt="Ícone de edição" />
-            </button>
+                <ButtonEditProject />
+            </ThumbWrapper>
 
-            <div className={className}>
+            <UserInfo className={className}>
                 <ProfileSmall userName={userName} index="12/12" className="on-thumb" />
 
                 <ul>
@@ -18,9 +20,7 @@ export const ProjectThumbnail = ({ onClick, className, editModal, toggleModal, h
                         <Tag key={index + tag} tag={tag} />
                     ))}
                 </ul>
-            </div>
-
-            <ButtonEditProject />
+            </UserInfo>
         </Container>
     );
 };

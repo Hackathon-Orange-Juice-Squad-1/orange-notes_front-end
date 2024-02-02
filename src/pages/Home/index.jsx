@@ -11,6 +11,7 @@ import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
 import { Input } from "../../components/Input";
 import { ButtonAddProject } from "../../components/ButtonAddProject";
+import { ProjectThumbnail } from "../../components/ProjectThumbnail";
 import { Modal } from "../../components/Modal";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
@@ -150,7 +151,7 @@ export const Home = () => {
                     {userHasProjects ?
                         projects.map(project => {
                             return (
-                                <ButtonAddProject
+                                <ProjectThumbnail
                                     key={project._id}
                                     userName="Camila Soares"
                                     tags={project.tags}
