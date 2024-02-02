@@ -151,6 +151,7 @@ export const Home = () => {
                         projects.map(project => {
                             return (
                                 <ProjectThumbnail
+                                    onClick={() => { toggleModal(); editModal(); }}
                                     key={project._id}
                                     userName="Camila Soares"
                                     tags={project.tags}

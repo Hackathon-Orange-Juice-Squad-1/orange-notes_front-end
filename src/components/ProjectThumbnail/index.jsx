@@ -3,13 +3,13 @@ import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 import { Container, ThumbWrapper, UserInfo } from "./styles";
 
-export const ProjectThumbnail = ({ className, thumb, tags = [], userName }) => {
+export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userName }) => {
     return (
         <Container>
             <ThumbWrapper>
                 <img src={thumb} alt="Thumbnail de preview do projeto" />
 
-                <ButtonEditProject />
+                <ButtonEditProject onClick={onClick} />
             </ThumbWrapper>
 
             <UserInfo className={className}>
