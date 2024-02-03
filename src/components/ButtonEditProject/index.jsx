@@ -1,30 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import iconEdit from "../../assets/img/icon_edit.svg";
 import { Container, Nav } from "./styles";
+import { ThumbWrapper } from "../ProjectThumbnail/styles";
 
-export const ButtonEditProject = ({ className, editModal, toggleModal, handleDeleteClick }) => {
+export const ButtonEditProject = ({ className, handleDeleteClick, handleEditClick }) => {
     const navRef = useRef();
     const [isActive, setIsActive] = useState(false);
     const ToggleIsActive = () => setIsActive(!isActive);
-    
-    const handleEditClick = () => {
-        editModal();
-        toggleModal();
-    }
 
     const handleClickOutside = (event) => {
         if (navRef.current && !navRef.current.contains(event.target)) {
             setIsActive(false);
         }
     }
-    
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    
+
     return (
         <Container>
             <button className={className} onClick={ToggleIsActive}>

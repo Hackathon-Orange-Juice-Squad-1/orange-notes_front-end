@@ -1,5 +1,5 @@
 // import thumbnail from "../../assets/img/img_landingpage-3x.png"
-import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
+// import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
 import { FaImages } from "react-icons/fa";
 import { Container } from "./styles";
 
