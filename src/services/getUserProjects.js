@@ -17,11 +17,14 @@ export const getUserProjects = async () => {
         if (body) {
             const projects = body.map((project) => {
                 return {
+                    userName: project.userName,
                     image: project.image,
                     title: project.title,
                     tags: project.tags,
                     _id: project._id,
                     dataAtualizacao: project.dataAtualizacao,
+                    desc: project.desc,
+                    link: project.link,
                 };
             });
             return projects

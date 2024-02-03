@@ -41,6 +41,8 @@ export const Home = () => {
 
     console.log(projects);
 
+    const [focusedProject, setFocusedProject] = useState(null);
+
     const [previewTitleValue, setPreviewTitleValue] = useState("");
     const previousPreviewTitleValue = useRef("");
     const [previewDescriptionValue, setPreviewDescriptionValue] = useState("");
@@ -146,7 +148,7 @@ export const Home = () => {
 
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
-                <Projects>
+                <Projects style={{flexWrap: "wrap", overflow: "auto"}}>
                     {userHasProjects ?
                         projects.map(project => {
                             return (
@@ -156,6 +158,9 @@ export const Home = () => {
                                     userName="Camila Soares"
                                     tags={project.tags}
                                     thumb={project.image.url}
+                                    title={project.title}
+                                    description={project.desc}
+                                    link={project.link}
                                 />
                             )
                         })
@@ -173,6 +178,17 @@ export const Home = () => {
 
                             <BlankSpace />
                         </div>}
+
+                        <ModalPreview
+                            nome={focusedProject?.userName}
+                            data={focusedProject?.dataAtualizacao}
+                            title={focusedProject?.title}
+                            image={focusedProject?.image?.url}
+                            description={focusedProject?.desc}
+                            link={focusedProject?.link}
+                            onClick={() => setFocusedProject(null)}
+                            preview={focusedProject !== null}>
+                        </ModalPreview>
                 </Projects>
             </Main>
 
@@ -237,7 +253,6 @@ export const Home = () => {
                 link={previewLinkValue}
                 onClick={handleClosePreviewClick}
                 preview={preview}>
-
             </ModalPreview>
 
             <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />
