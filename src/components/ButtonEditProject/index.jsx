@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import iconEdit from "../../assets/img/icon_edit.svg";
 import { Container, Nav } from "./styles";
-import { ThumbWrapper } from "../ProjectThumbnail/styles";
+// import { ThumbWrapper } from "../ProjectThumbnail/styles";
 
 export const ButtonEditProject = ({ className, handleDeleteClick, handleEditClick }) => {
     const navRef = useRef();

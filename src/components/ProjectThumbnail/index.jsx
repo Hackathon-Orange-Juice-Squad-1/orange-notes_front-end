@@ -1,21 +1,49 @@
+import {jwtDecode} from "jwt-decode";
 import { useState, useEffect, useRef } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
+import { useToggleConfirmDeleteModal } from "../../hooks/useToggleConfirmDeleteModal";
+import { useToggleSuccessModal } from "../../hooks/useToggleSuccessModal";
 import { ButtonEditProject } from "../ButtonEditProject";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 import { ModalPreview } from "../ModalPreview";
+import { ModalConfirmDelete } from "../ModalConfirmDelete";
 import { Modal } from "../Modal";
 import { Input } from "../Input";
 import { Textarea } from "../Textarea";
 import { Button } from "../Button";
 import { Container, ThumbWrapper, UserInfo } from "./styles";
 
-export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userName, title, description, link }) => {
+export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userName, title, description, link, projectId }) => {
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
+    const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
+    const { toggleSuccessModal } = useToggleSuccessModal();
     const [isFocused, setIsFocused] = useState(false);
     const [onEdit, setOnEdit] = useState(false);
+    const token = localStorage.getItem('token');
+    const userId = jwtDecode(token).id;
+
+    const deleteProject = async () => {
+        try {
+            const response = await fetch(`https://orange-notes-backend.onrender.com/projetos/${userId}/${projectId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                toggleConfirmDeleteModal();
+                toggleSuccessModal();
+                location.reload();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const toggleEdit = () => {
         setOnEdit(!onEdit);
@@ -39,6 +67,10 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
         toggleModal();
     };
 
+    const handleDeleteClick = () => {
+        toggleConfirmDeleteModal();
+    };
+
     const handlePreviewClick = () => {
         toggleModal();
         togglePreview();
@@ -52,6 +84,10 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     const handleCancelClick = () => {
         toggleEdit();
         toggleModal();
+    };
+
+    const handleCancelDeleteClick = () => {
+        toggleConfirmDeleteModal();
     };
 
     const [previewTitleValue, setPreviewTitleValue] = useState(title);
@@ -79,7 +115,7 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
                 <ThumbWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <img src={thumb} alt="Thumbnail de preview do projeto" onClick={togglePreview} />
 
-                    {isFocused && <ButtonEditProject onClick={onClick} handleEditClick={handleEditClick} />}
+                    {isFocused && <ButtonEditProject onClick={onClick} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
                 </ThumbWrapper>
 
                 <UserInfo className={className}>
@@ -165,6 +201,8 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
                     </div>
                 </div>
             </Modal>
+
+            <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={deleteProject} handleCancelDeleteClick={handleCancelDeleteClick} deleteProject={handleDeleteClick} />
         </>
     );
 };

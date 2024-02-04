@@ -91,8 +91,8 @@ export const Home = () => {
     };
 
     const handleConfirmDeleteClick = () => {
-        toggleUserHasProjects();
         toggleDeletion(true);
+        projects.deleteProject();
         toggleConfirmDeleteModal();
         toggleSuccessModal();
     };
@@ -102,33 +102,21 @@ export const Home = () => {
     };
 
     const handleCancelAddClick = () => {
-        if (edit) {
-            toggleModal();
-        } else {
-            if (userHasProjects) {
-                toggleUserHasProjects();
-                toggleModal();
-            } else {
-                toggleModal();
-            }
-        }
+        toggleModal();
     }
 
     const [edit, toggleEdit] = useState(false);
-    const [deletion, toggleDeletion] = useState(false);
+    // const [deletion, toggleDeletion] = useState(false);
     const editModal = () => toggleEdit(true);
     const addModal = () => toggleEdit(false);
     const modalTitle = edit ? "Editar projeto" : "Adicionar projeto";
     const successModalTitle = () => {
-        if (deletion) {
-            return "Projeto deletado com sucesso!";
+        if (edit) {
+            return "Projeto editado com sucesso!";
         } else {
-            if (edit) {
-                return "Projeto editado com sucesso!";
-            } else {
-                return "Projeto adicionado com sucesso!";
-            }
+            return "Projeto adicionado com sucesso!";
         }
+
     };
     // const handleUploadClick = () => {
     //     const fileInput = document.getElementById('upload');
@@ -143,7 +131,7 @@ export const Home = () => {
         fetch(`https://orange-notes-backend.onrender.com/projetos/${id}`, {
             method: 'POST',
             body: JSON.stringify({
-               
+
                 title: event.currentTarget.title.value,
                 link: event.currentTarget.link.value,
                 tags: [event.currentTarget.tags.value],
@@ -169,7 +157,7 @@ export const Home = () => {
 
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
-                <Projects style={{flexWrap: "wrap", overflow: "auto"}}>
+                <Projects style={{ flexWrap: "wrap", overflow: "auto" }}>
                     {userHasProjects ?
                         projects.map(project => {
                             return (
@@ -182,6 +170,7 @@ export const Home = () => {
                                     title={project.title}
                                     description={project.desc}
                                     link={project.link}
+                                    projectId={project._id}
                                 />
                             )
                         })
@@ -200,16 +189,16 @@ export const Home = () => {
                             <BlankSpace />
                         </div>}
 
-                        <ModalPreview
-                            nome={focusedProject?.userName}
-                            data={focusedProject?.dataAtualizacao}
-                            title={focusedProject?.title}
-                            image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
-                            description={focusedProject?.desc}
-                            link={focusedProject?.link}
-                            onClick={() => setFocusedProject(null)}
-                            preview={focusedProject !== null}>
-                        </ModalPreview>
+                    <ModalPreview
+                        nome={focusedProject?.userName}
+                        data={focusedProject?.dataAtualizacao}
+                        title={focusedProject?.title}
+                        image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
+                        description={focusedProject?.desc}
+                        link={focusedProject?.link}
+                        onClick={() => setFocusedProject(null)}
+                        preview={focusedProject !== null}>
+                    </ModalPreview>
                 </Projects>
             </Main>
 

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUserData } from "../../services/getUserData";
 import logo from "../../assets/img/logo-orange-3x.png";
-import avatar from "../../assets/img/avatar-2x.png";
+// import avatar from "../../assets/img/avatar-2x.png";
 import { FaBell } from "react-icons/fa6";
 import { Container, Nav, NavLinks, NavProfile, NavModal, HamburgerButton } from "./styles";
 
@@ -82,7 +82,7 @@ export const Header = () => {
                         <div className="arrow-up"></div>
 
                         <ul>
-                            <li><button>Editar perfil</button></li>
+                            {/* <li><button>Editar perfil</button></li> */}
                             <li><button onClick={handleLogout}>Logout</button></li>
                         </ul>
                     </NavModal>

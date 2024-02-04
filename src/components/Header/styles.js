@@ -254,7 +254,7 @@ export const NavProfile = styled.ul`
 export const NavModal = styled.nav`
     position: absolute;
     top: 6rem;
-    right: 8rem;
+    right: 7.5rem;
 
     width: 20.8rem;
     padding: 1.6rem 0;
