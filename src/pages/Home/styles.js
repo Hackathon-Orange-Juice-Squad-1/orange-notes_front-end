@@ -54,6 +54,16 @@ export const Projects = styled.div`
         gap: 2.4rem;
         /* margin-top: 4rem; */
     }
+
+    > div.no-projects {
+        @media (min-width: 425px) {
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 2.4rem;
+            /* margin-top: 4rem; */
+        }
+    }
 `;
 
 export const BlankSpace = styled.div`

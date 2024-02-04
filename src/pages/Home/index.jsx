@@ -11,6 +11,7 @@ import { Header } from "../../components/Header";
 import { Profile } from "../../components/Profile";
 import { Input } from "../../components/Input";
 import { ButtonAddProject } from "../../components/ButtonAddProject";
+import { ProjectThumbnail } from "../../components/ProjectThumbnail";
 import { Modal } from "../../components/Modal";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
@@ -29,11 +30,10 @@ export const Home = () => {
     useEffect(() => {
         checkUserProjects().then((response) => {
             setUserHasProjects(response);
-            console.log(userHasProjects);
         });
     }, []);
 
-    let [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([]);
     useEffect(() => {
         getUserProjects().then((response) => {
             setProjects(response);
@@ -41,6 +41,8 @@ export const Home = () => {
     }, []);
 
     console.log(projects);
+
+    const [focusedProject, setFocusedProject] = useState(null);
 
     const [previewTitleValue, setPreviewTitleValue] = useState("");
     const previousPreviewTitleValue = useRef("");
@@ -169,19 +171,23 @@ export const Home = () => {
 
                 <Input type="text" label="Buscar tags" name="searchTags" />
 
-                <Projects>
+                <Projects style={{flexWrap: "wrap", overflow: "auto"}}>
                     {userHasProjects ?
                         projects.map(project => {
                             return (
-                                <ButtonAddProject
+                                <ProjectThumbnail
+                                    onClick={() => { toggleModal(); editModal(); }}
                                     key={project._id}
-                                    userName="Camila Soares"
+                                    userName={project.userName}
                                     tags={project?.tags}
                                     thumb={project?.image?.url}
+                                    title={project.title}
+                                    description={project.desc}
+                                    link={project.link}
                                 />
                             )
                         })
-                        : <div>
+                        : <div className="no-projects">
                             <ButtonAddProject
                                 onClick={() => { toggleModal(); addModal(); }}
                                 userHasProjects={userHasProjects}
@@ -195,6 +201,17 @@ export const Home = () => {
 
                             <BlankSpace />
                         </div>}
+
+                        <ModalPreview
+                            nome={focusedProject?.userName}
+                            data={focusedProject?.dataAtualizacao}
+                            title={focusedProject?.title}
+                            image={focusedProject?.image?.url}
+                            description={focusedProject?.desc}
+                            link={focusedProject?.link}
+                            onClick={() => setFocusedProject(null)}
+                            preview={focusedProject !== null}>
+                        </ModalPreview>
                 </Projects>
             </Main>
 
@@ -259,7 +276,6 @@ export const Home = () => {
                 link={previewLinkValue}
                 onClick={handleClosePreviewClick}
                 preview={preview}>
-
             </ModalPreview>
 
             <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />

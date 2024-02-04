@@ -1,7 +1,9 @@
+import { auth, googleProvider } from '../../services/firebase';
+
 import { useState } from "react";
 
-import { auth, googleProvider } from '../../services/firebase';
 import { handleLogin } from '../../services/loginAuthService';
+import { handleGoogleLogin } from '../../services/googleAuthService';
 
 import {
   Content,
@@ -29,11 +31,13 @@ export const Login = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleGoogleLogin = async () => {
+  const googleLogin = async () => {
     const result = await auth.signInWithPopup(googleProvider);
-    console.log(result);
-    const googleToken = result.user.uid;
-    localStorage.setItem('google_login_token', googleToken);
+    const googleToken = result.user;
+    const { uid, displayName, email, photoURL } = googleToken;
+
+    await handleGoogleLogin(uid, displayName, email, photoURL);
+    location.reload();
   };
 
   const login = (event) => {
@@ -54,7 +58,7 @@ export const Login = () => {
       <Content>
         <h1>Entre no Orange Portfólio</h1>
 
-        <ButtonGoogle type="button" onClick={async () => {await handleGoogleLogin(); location.reload();}}>
+        <ButtonGoogle type="button" onClick={async () => {await googleLogin()}}>
           <LogoGoogle
             src={logoGoogle}
             alt="Logo Google"
