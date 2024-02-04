@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const useIsLoggedIn = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +22,7 @@ export const useIsLoggedIn = () => {
 
     function isGoogleTokenValid(googleToken) {
         try {
-           return googleToken === null ? false : true;
+            return googleToken === null ? false : true;
         } catch (err) {
             console.log(err);
             return false;
@@ -31,13 +31,14 @@ export const useIsLoggedIn = () => {
 
     function isTokenValid(userToken) {
         try {
-            jwtDecode(userToken)
+            const token = jwtDecode(userToken)
+            console.log('token', token)
             return true;
         } catch (err) {
             console.log(err);
             return false;
         }
-    } 
+    }
 
     return { isLoggedIn };
 };

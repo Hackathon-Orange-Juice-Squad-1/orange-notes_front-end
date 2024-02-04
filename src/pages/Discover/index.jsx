@@ -2,7 +2,6 @@ import { Container, Main, Projects, Thumbnail, Title } from "./styles";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { ProfileSmall } from "../../components/ProfileSmall";
-import avatarBianca from "../../assets/img/avatarBianca.png"
 import { ModalPreview } from "../../components/ModalPreview";
 import { useState, useEffect } from "react";
 
@@ -35,20 +34,20 @@ export const Discover = () => {
                 <Projects>
                     {projectList.map((project) => (
                         <Thumbnail key={project._id} onClick={() => setFocusedProject(project)}>
-                            <img src={project.image.url} alt="Thumbnail de preview do projeto" />
+                            <img src={project?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'} alt="Thumbnail de preview do projeto" width="390px" height="260px" />
 
                             <div>
-                                <ProfileSmall avatar={avatarBianca} userName={project.userName} index={project.dataCriacao} className="on-thumb" />
+                                <ProfileSmall avatar={project.photoUrl} userName={project.userName} index={project.dataCriacao} className="on-thumb" />
                             </div>
                         </Thumbnail>
                     ))}
                     <div>
                         <ModalPreview
-                            avatar={avatarBianca}
+                            avatar={focusedProject?.photoUrl}
                             nome={focusedProject?.userName}
                             data={focusedProject?.dataCriacao}
                             title={focusedProject?.title}
-                            image={focusedProject?.image?.url}
+                            image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
                             description={focusedProject?.desc}
                             link={focusedProject?.link}
                             onClick={() => setFocusedProject(null)}

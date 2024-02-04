@@ -59,7 +59,7 @@ export const ModalBody = styled.div`
         margin-bottom: 1.6rem;
     }
 
-    > div {
+    > form {
         @media (min-width: 425px) {
             display: flex;
             flex-direction: row-reverse;
@@ -68,7 +68,7 @@ export const ModalBody = styled.div`
             gap: 2.4rem;
             width: 100%;
         }
-
+    
         > .modal__form {
             width: 100%;
         }

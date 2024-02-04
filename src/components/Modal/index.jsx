@@ -1,14 +1,14 @@
 import { Container, ModalBody } from "./styles";
 
-export const Modal = ({ children, open, title }) => {
+export const Modal = ({ children, open, title, onSubmit }) => {
   if (open) {
     return (
         <Container open={open}>
           <ModalBody>
             <h2>{title}</h2>
-            <div>
+            <form onSubmit={onSubmit}>
               {children}
-            </div>
+            </form>
           </ModalBody>
         </Container>
       );
