@@ -11,8 +11,6 @@ export const useIsLoggedIn = () => {
     useEffect(() => {
         const isTokenVerified = isTokenValid(token) || isGoogleTokenValid(storedToken);
 
-        console.log(isGoogleTokenValid(storedToken), isTokenValid(token), isTokenVerified);
-
         if (isTokenVerified) {
             setIsLoggedIn(true);
         } else {
@@ -31,9 +29,8 @@ export const useIsLoggedIn = () => {
 
     function isTokenValid(userToken) {
         try {
-            const token = jwtDecode(userToken)
-            console.log('token', token)
-            return true;
+            const token = jwtDecode(userToken);
+            return token === null ? false : true;
         } catch (err) {
             console.log(err);
             return false;

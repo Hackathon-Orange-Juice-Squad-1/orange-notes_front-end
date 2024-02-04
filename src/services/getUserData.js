@@ -13,12 +13,9 @@ export const getUserData = async () => {
             },
         });
 
-        console.log(response);
-
         const body = await response.json().then((data) => data);
 
         if (body) {
-            console.log(body.profilePicture);
             if (Object.keys(body.profilePicture).length == 0 || body.profilePicture == null) {
                 body.profilePicture = avatarPlaceholder;
             }

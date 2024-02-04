@@ -1,11 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getUserData } from "../../services/getUserData";
 import logo from "../../assets/img/logo-orange-3x.png";
 import avatar from "../../assets/img/avatar-2x.png";
 import { FaBell } from "react-icons/fa6";
 import { Container, Nav, NavLinks, NavProfile, NavModal, HamburgerButton } from "./styles";
 
 export const Header = () => {
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        getUserData().then((response) => {
+            setUserData(response);
+        });
+    }, []);
+
     const [isActive, setIsActive] = useState(false);
     const [isAvatarActive, setIsAvatarActive] = useState(false);
     const navRef = useRef();
@@ -60,7 +68,7 @@ export const Header = () => {
                 <NavProfile>
                     <li>
                         <a onClick={ToggleIsAvatarActive}>
-                            <img src={avatar} alt="Avatar de usuário" />
+                            <img src={userData.userAvatar} alt="Avatar de usuário" />
                         </a>
                     </li>
 

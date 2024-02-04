@@ -40,8 +40,6 @@ export const Home = () => {
         });
     }, []);
 
-    console.log(projects);
-
     const [focusedProject, setFocusedProject] = useState(null);
 
     const [previewTitleValue, setPreviewTitleValue] = useState("");

@@ -11,9 +11,7 @@ export const Profile = ({ userCountry, onClick }) => {
             setUserData(response);
         });
     }, []);
-
-    console.log(userData);
-
+    
     return (
         <Container>
             <img src={userData.userAvatar} alt="Imagem de avatar de usuário" />
