@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 
+const onHover = keyframes`
+    0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(1.05);
+	}
+`;
+
 const navOpenAnimation = keyframes`
     0% {
         transform: translate3d(0, 0, 0) scale(0);
@@ -49,6 +59,14 @@ export const Thumbnail = styled.li`
   border-radius: 4px;
 
   margin-top: 2.4rem;
+
+  transition: filter .3s;
+
+  &:hover {
+      cursor: pointer;
+      filter: drop-shadow(3px 3px 5px #000000);
+      animation: ${onHover} ease-in-out .3s forwards;
+  }
 
   > img {
     width: 100%;
