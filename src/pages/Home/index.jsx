@@ -17,6 +17,7 @@ import { Button } from "../../components/Button";
 import { ModalPreview } from "../../components/ModalPreview";
 import { ModalSuccess } from "../../components/ModalSuccess";
 import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
+import { jwtDecode } from "jwt-decode";
 
 export const Home = () => {
     const { open, toggleModal } = useToggleModal();
@@ -129,11 +130,33 @@ export const Home = () => {
             }
         }
     };
-
     // const handleUploadClick = () => {
     //     const fileInput = document.getElementById('upload');
     //     fileInput.click();
     // };
+
+    const token = localStorage.getItem('token');
+    const { id } = jwtDecode(token);
+
+    function addProject(event) {
+        event.preventDefault()
+        fetch(`https://orange-notes-backend.onrender.com/projetos/${id}`, {
+            method: 'POST',
+            body: JSON.stringify({
+               
+                title: event.currentTarget.title.value,
+                link: event.currentTarget.link.value,
+                tags: [event.currentTarget.tags.value],
+                desc: event.currentTarget.description.value,
+            }),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(() => handleSaveClick())
+            .catch(error => alert(error.message));
+    }
 
     return (
         <Container>
@@ -153,8 +176,8 @@ export const Home = () => {
                                 <ButtonAddProject
                                     key={project._id}
                                     userName="Camila Soares"
-                                    tags={project.tags}
-                                    thumb={project.image.url}
+                                    tags={project?.tags}
+                                    thumb={project?.image?.url}
                                 />
                             )
                         })
@@ -175,7 +198,7 @@ export const Home = () => {
                 </Projects>
             </Main>
 
-            <Modal title={modalTitle} open={open}>
+            <Modal title={modalTitle} open={open} onSubmit={addProject}>
                 <div className="modal__form">
                     <Input
                         type="text"
@@ -223,7 +246,7 @@ export const Home = () => {
                     </button>
 
                     <div style={{ display: "flex", gap: "1.6rem" }}>
-                        <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
+                        <Button type="submit" label="Salvar" $primary="true" />
                         <Button label="Cancelar" onClick={handleCancelAddClick} />
                     </div>
                 </div>
