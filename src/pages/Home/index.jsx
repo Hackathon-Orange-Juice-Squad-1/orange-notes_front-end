@@ -180,7 +180,7 @@ export const Home = () => {
                                     key={project._id}
                                     userName={project.userName}
                                     tags={project?.tags}
-                                    thumb={project?.image?.url}
+                                    thumb={project?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
                                     title={project.title}
                                     description={project.desc}
                                     link={project.link}
@@ -206,7 +206,7 @@ export const Home = () => {
                             nome={focusedProject?.userName}
                             data={focusedProject?.dataAtualizacao}
                             title={focusedProject?.title}
-                            image={focusedProject?.image?.url}
+                            image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
                             description={focusedProject?.desc}
                             link={focusedProject?.link}
                             onClick={() => setFocusedProject(null)}

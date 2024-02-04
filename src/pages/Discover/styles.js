@@ -43,6 +43,7 @@ export const Thumbnail = styled.li`
   cursor: pointer;
 
   max-width: 38.9rem;
+  min-width: 389px;
   min-height: 25.8rem;
   border: none;
   border-radius: 4px;
