@@ -1,14 +1,25 @@
 import avatar from "../../assets/img/avatar-3x.png";
+import { useEffect, useState } from "react";
+import { getUserData } from "../../services/getUserData";
 import { Container } from "./styles";
 import { Button } from "../Button";
 
-export const Profile = ({ userName, userCountry, onClick }) => {
+export const Profile = ({ userCountry, onClick }) => {
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        getUserData().then((response) => {
+            setUserData(response);
+        });
+    }, []);
+
+    console.log(userData);
+
     return (
         <Container>
-            <img src={avatar} alt="Imagem de avatar de usuário" />
+            <img src={userData.userAvatar} alt="Imagem de avatar de usuário" />
 
             <div>
-                <h2>{userName}</h2>
+                <h2>{userData.userName}</h2>
 
                 <span>{userCountry}</span>
 
