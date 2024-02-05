@@ -1,5 +1,6 @@
 import {jwtDecode} from "jwt-decode";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useToggleConfirmDeleteModal } from "../../hooks/useToggleConfirmDeleteModal";
 import { Link } from "react-router-dom";
 import { getUserData } from "../../services/getUserData";
@@ -13,6 +14,7 @@ export const Header = () => {
     const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).id;
+    const navigate = useNavigate();
 
     const [userData, setUserData] = useState([]);
     useEffect(() => {
@@ -28,6 +30,7 @@ export const Header = () => {
     const ToggleIsActive = () => setIsActive(!isActive);
     const handleLogout = () => {
         localStorage.clear();
+        navigate('/');
         location.reload();
     };
 
