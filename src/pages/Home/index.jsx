@@ -169,7 +169,7 @@ export const Home = () => {
                                     key={project._id}
                                     userName={project.userName}
                                     tags={project?.tags}
-                                    thumb={project?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
+                                    thumb={project?.image?.url || 'https://img.freepik.com/fotos-gratis/inspiracao-desenvolvimento-moderno-criativo_53876-21248.jpg?w=996&t=st=1707142640~exp=1707143240~hmac=05607122ec7effc15bf1ba8cb1f54b466ccb16e0f51fed73ec5cff4bf5541f25'}
                                     title={project.title}
                                     description={project.desc}
                                     link={project.link}
