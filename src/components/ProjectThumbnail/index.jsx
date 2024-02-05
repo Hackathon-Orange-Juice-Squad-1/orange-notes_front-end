@@ -25,6 +25,25 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).id;
 
+    function editProject(event) {
+        event.preventDefault()
+        fetch(`https://orange-notes-backend.onrender.com/projetos/${userId}/${projectId}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                title: event.currentTarget.title.value,
+                link: event.currentTarget.link.value,
+                tags: [event.currentTarget.tags.value],
+                desc: event.currentTarget.description.value,
+            }),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(() => handleSaveEditClick())
+            .catch(error => alert(error.message));
+    }
+
     const deleteProject = async () => {
         try {
             const response = await fetch(`https://orange-notes-backend.onrender.com/projetos/${userId}/${projectId}`, {
@@ -62,6 +81,13 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
         onEdit && toggleModal();
     };
 
+    const handleSaveEditClick = () => {
+        toggleEdit();
+        toggleModal();
+        toggleSuccessModal();
+        location.reload();
+    }
+
     const handleEditClick = () => {
         toggleEdit();
         toggleModal();
@@ -74,11 +100,6 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     const handlePreviewClick = () => {
         toggleModal();
         togglePreview();
-    };
-
-    const handleSaveClick = () => {
-        toggleEdit();
-        console.log('Salvar');
     };
 
     const handleCancelClick = () => {
@@ -146,7 +167,7 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
                 preview={preview}>
             </ModalPreview> }
 
-            <Modal title="Editar projeto" open={open}>
+            <Modal title="Editar projeto" open={open} onSubmit={editProject}>
                 <div className="modal__form">
                     <Input
                         type="text"
@@ -196,7 +217,7 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
                     </button>
 
                     <div style={{ display: "flex", gap: "1.6rem" }}>
-                        <Button label="Salvar" $primary="true" onClick={handleSaveClick} />
+                        <Button type="submit" label="Salvar" $primary="true" />
                         <Button label="Cancelar" onClick={handleCancelClick} />
                     </div>
                 </div>
