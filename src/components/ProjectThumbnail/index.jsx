@@ -8,6 +8,7 @@ import { ButtonEditProject } from "../ButtonEditProject";
 import { ProfileSmall } from "../ProfileSmall";
 import { Tag } from "../Tag";
 import { ModalPreview } from "../ModalPreview";
+import { ModalSuccess } from "../ModalSuccess";
 import { ModalConfirmDelete } from "../ModalConfirmDelete";
 import { Modal } from "../Modal";
 import { Input } from "../Input";
@@ -19,7 +20,7 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     const { open, toggleModal } = useToggleModal();
     const { preview, togglePreview } = useTogglePreview();
     const { confirmDelete, toggleConfirmDeleteModal } = useToggleConfirmDeleteModal();
-    const { toggleSuccessModal } = useToggleSuccessModal();
+    const { success, toggleSuccessModal } = useToggleSuccessModal();
     const [isFocused, setIsFocused] = useState(false);
     const [onEdit, setOnEdit] = useState(false);
     const token = localStorage.getItem('token');
@@ -57,7 +58,6 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
             if (response.ok) {
                 toggleConfirmDeleteModal();
                 toggleSuccessModal();
-                location.reload();
             }
         } catch (error) {
             console.error(error);
@@ -82,10 +82,8 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     };
 
     const handleSaveEditClick = () => {
-        toggleEdit();
         toggleModal();
         toggleSuccessModal();
-        location.reload();
     }
 
     const handleEditClick = () => {
@@ -110,6 +108,14 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
     const handleCancelDeleteClick = () => {
         toggleConfirmDeleteModal();
     };
+
+    const handleConfirmSuccessClick = () => {
+        onEdit && toggleEdit();
+        toggleSuccessModal();
+        location.reload();
+    };
+
+    const successTitle = onEdit ? "Projeto editado com sucesso" : "Projeto excluído com sucesso";
 
     const [previewTitleValue, setPreviewTitleValue] = useState(title);
     const previousPreviewTitleValue = useRef("");
@@ -224,6 +230,8 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
             </Modal>
 
             <ModalConfirmDelete confirmationText="excluir o projeto do seu portfólio" confirmDelete={confirmDelete} handleConfirmDeleteClick={deleteProject} handleCancelDeleteClick={handleCancelDeleteClick} deleteProject={handleDeleteClick} />
+
+            <ModalSuccess success={success} title={successTitle} onClick={handleConfirmSuccessClick} />
         </>
     );
 };

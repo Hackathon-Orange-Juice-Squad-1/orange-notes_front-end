@@ -1,28 +1,23 @@
-import styled, { keyframes } from "styled-components";
-
-const onHover = keyframes`
-    0% {
-		transform: scale(1);
-	}
-
-	100% {
-		transform: scale(1.05);
-	}
-`;
+import styled from "styled-components";
 
 export const Container = styled.div`
     position: relative;
 
-    width: 38.9rem;
+    max-width: 100%;
 
     margin-top: 2.4rem;
 
     transition: filter .3s;
+    transition: transform .3s;
+
+    @media (min-width: 425px) {
+        width: 38.9rem;
+    }
 
     &:hover {
         cursor: pointer;
+        transform: scale(1.02);
         filter: drop-shadow(3px 3px 5px #000000);
-        animation: ${onHover} ease-in-out .3s forwards;
     }
 `;
 

@@ -1,4 +1,3 @@
-import avatar from "../../assets/img/avatar-3x.png";
 import { useEffect, useState } from "react";
 import { getUserData } from "../../services/getUserData";
 import { Container } from "./styles";
@@ -17,7 +16,7 @@ export const Profile = ({ userCountry, onClick }) => {
             <img src={userData.userAvatar} alt="Imagem de avatar de usuário" />
 
             <div>
-                <h2>{userData.userName}</h2>
+                <h2>{userData.userName} {userData.userLastName}</h2>
 
                 <span>{userCountry}</span>
 

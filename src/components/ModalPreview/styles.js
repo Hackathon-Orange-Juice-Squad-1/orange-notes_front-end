@@ -19,13 +19,13 @@ const modalOpenAnimation = keyframes`
 `;
 
 export const Container = styled.div`
-    position: absolute;
+    position: fixed;
     z-index: 0;
     top: 0;
     left: 0;
     width: 100%;
     min-height: 100%;
-    background-color: transparent;
+    background-color: ${({ theme }) => theme.COLORS.WHITE_1};
     backdrop-filter: none;
 
     display: flex;
@@ -33,12 +33,11 @@ export const Container = styled.div`
     padding: 6.4rem 2.4rem; 
 
     @media (min-width: 425px) {
+        position: absolute;
         z-index: 999;
         background-color: #00000050;
         backdrop-filter: blur(2px);
         padding: 13.4rem 11.9rem; 
-        overflow: hidden;
-
     }
 `;
 

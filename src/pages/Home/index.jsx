@@ -62,23 +62,13 @@ export const Home = () => {
     }, [previewLinkValue]);
 
     const handleSaveClick = () => {
-        toggleDeletion(false);
-
-        if (userHasProjects) {
-            toggleModal();
-            toggleSuccessModal();
-        } else {
-            alert('Por favor, insira a imagem e os dados do seu projeto.')
-        }
+        toggleModal();
+        toggleSuccessModal();
     };
 
     const handlePreviewClick = () => {
-        if (userHasProjects) {
-            toggleModal();
-            togglePreview();
-        } else {
-            alert('Por favor, insira a imagem e os dados do seu projeto.')
-        }
+        toggleModal();
+        togglePreview();
     };
 
     const handleClosePreviewClick = () => {
@@ -104,6 +94,11 @@ export const Home = () => {
     const handleCancelAddClick = () => {
         toggleModal();
     }
+
+    const handleConfirmSuccessClick = () => {
+        toggleSuccessModal();
+        location.reload();
+    };
 
     const [edit, toggleEdit] = useState(false);
     // const [deletion, toggleDeletion] = useState(false);
@@ -151,13 +146,15 @@ export const Home = () => {
             <Header />
 
             <Main>
-                <Profile userName="Camila Soares" userCountry="Brasil" onClick={() => { toggleModal(); addModal(); }} />
+                <Profile userCountry="Brasil" onClick={() => { toggleModal(); addModal(); }} />
 
-                <h2>Meus projetos</h2>
+                <div className="search">
+                    <h2>Meus projetos</h2>
 
-                <Input type="text" label="Buscar tags" name="searchTags" />
+                    <Input type="text" label="Buscar tags" name="searchTags" />
+                </div>
 
-                <Projects style={{ flexWrap: "wrap", overflow: "auto" }}>
+                <Projects>
                     {userHasProjects ?
                         projects.map(project => {
                             return (
@@ -265,7 +262,7 @@ export const Home = () => {
                 preview={preview}>
             </ModalPreview>
 
-            <ModalSuccess title={successModalTitle()} onClick={toggleSuccessModal} success={success} />
+            <ModalSuccess title={successModalTitle()} onClick={handleConfirmSuccessClick} success={success} />
 
             <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={handleConfirmDeleteClick} handleCancelDeleteClick={handleCancelDeleteClick} />
         </Container>

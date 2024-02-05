@@ -9,7 +9,6 @@ export const Container = styled.div`
 
     > img {
         width: 4rem;
-        height: 4rem;
         border-radius: 50%;
     }
 
@@ -38,7 +37,6 @@ export const Container = styled.div`
 
         img {
             width: 2.4rem;
-            height: 2.4rem;
         }
 
         div {

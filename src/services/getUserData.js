@@ -21,9 +21,10 @@ export const getUserData = async () => {
             }
 
             const userName = body.first_name; 
+            const userLastName = body.last_name;
             const userAvatar = body.profilePicture;
             
-            return {userName, userAvatar}; 
+            return {userName, userLastName, userAvatar}; 
         } else {
             throw new Error(`Erro: ${body.msg}`);
         }

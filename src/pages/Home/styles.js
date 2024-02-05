@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    display: grid;
+
     width: 100vw;
     height: 100vh;
 
@@ -11,7 +13,7 @@ export const Container = styled.div`
 
     @media (min-width: 425px) {
         grid-template-rows: 7.3rem 1fr;
-        gap: 11.2rem;
+        /* gap: 11.2rem; */
     }
 `;
 
@@ -20,38 +22,44 @@ export const Main = styled.main`
 
     width: 100%;
 
-    padding: 12rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3.6rem;
+
+    padding: 4.8rem 2.4rem;
 
     @media (min-width: 425px) {
         max-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+
+        gap: 2rem;
+
         padding-bottom: 0;
         overflow: auto;
     }
 
-    > h2 {
-        margin: 4rem 0 1.6rem;
-
-        font-size: 2rem;
-        font-weight: 500;
-        line-height: 2rem;
-        letter-spacing: 0.15px;
-        color: ${({ theme }) => theme.COLORS.GRAY_3};
-
-        @media (min-width: 425px) {
-            margin: 5.6rem 0 1.6rem;
+    > .search {
+        h2 {
+            margin-bottom: 1.6rem;
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 2rem;
+            letter-spacing: 0.15px;
+            color: ${({ theme }) => theme.COLORS.GRAY_3};
         }
     }
 `;
 
 export const Projects = styled.div`
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+
     @media (min-width: 425px) {
-        max-width: 100%;
-        display: flex;
+        flex-direction: row;
         align-items: center;
         gap: 2.4rem;
+        overflow: auto;
         /* margin-top: 4rem; */
     }
 
