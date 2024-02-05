@@ -40,6 +40,12 @@ export const Home = () => {
         });
     }, []);
 
+    const fileInputRef = useRef();
+
+    const handleImageUploadClick = () => {
+        fileInputRef.current.click();
+    };
+
     const [focusedProject, setFocusedProject] = useState(null);
 
     const [previewTitleValue, setPreviewTitleValue] = useState("");
@@ -174,8 +180,6 @@ export const Home = () => {
                         : <div className="no-projects">
                             <ButtonAddProject
                                 onClick={() => { toggleModal(); addModal(); }}
-                                userHasProjects={userHasProjects}
-                                toggleUserHasProjects={toggleUserHasProjects}
                                 editModal={editModal}
                                 toggleModal={toggleModal}
                                 handleDeleteClick={handleDeleteClick}
@@ -234,8 +238,8 @@ export const Home = () => {
                     <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
                     <label htmlFor="upload">
-                        <ButtonAddProject onClick={toggleUserHasProjects} className="on-edit" userHasProjects={userHasProjects} />
-                        <input type="file" id="upload" style={{ display: "none" }} />
+                        <ButtonAddProject onClick={handleImageUploadClick} />
+                        <input type="file" id="upload" ref={fileInputRef} style={{ display: 'none' }} />
                     </label>
 
 
