@@ -32,7 +32,7 @@ export const Main = styled.main`
     @media (min-width: 425px) {
         max-height: 100%;
 
-        gap: 2rem;
+        gap: 2.4rem;
 
         padding-bottom: 0;
         overflow: auto;
@@ -60,6 +60,7 @@ export const Projects = styled.div`
         align-items: center;
         gap: 2.4rem;
         overflow: auto;
+        flex-wrap: wrap;
         /* margin-top: 4rem; */
     }
 

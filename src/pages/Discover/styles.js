@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 
-const onHover = keyframes`
-    0% {
-		transform: scale(1);
-	}
-
-	100% {
-		transform: scale(1.05);
-	}
-`;
-
 const navOpenAnimation = keyframes`
     0% {
         transform: translate3d(0, 0, 0) scale(0);
@@ -26,6 +16,8 @@ const navOpenAnimation = keyframes`
 `;
 
 export const Container = styled.div`
+  display: grid;
+
   width: 100vw;
   height: 100vh;
 
@@ -38,7 +30,7 @@ export const Container = styled.div`
 
   @media (min-width: 425px) {
     grid-template-rows: 7.3rem 1fr;
-    gap: 11.2rem;
+    /* gap: 11.2rem; */
   }
 `;
 
@@ -49,23 +41,23 @@ export const Title = styled.div`
 `;
 
 export const Thumbnail = styled.li`
-  position: relative;
-  cursor: pointer;
+    position: relative;
 
-  max-width: 38.9rem;
-  min-width: 389px;
-  min-height: 25.8rem;
-  border: none;
-  border-radius: 4px;
+  max-width: 100%;
 
   margin-top: 2.4rem;
 
   transition: filter .3s;
+  transition: transform .3s;
+
+  @media (min-width: 425px) {
+    width: 38.9rem;
+  }
 
   &:hover {
-      cursor: pointer;
-      filter: drop-shadow(3px 3px 5px #000000);
-      animation: ${onHover} ease-in-out .3s forwards;
+    cursor: pointer;
+    transform: scale(1.02);
+    filter: drop-shadow(3px 3px 5px #000000);
   }
 
   > img {
@@ -93,7 +85,7 @@ export const Thumbnail = styled.li`
   }
 
   > div {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -186,13 +178,17 @@ export const Main = styled.main`
 
   width: 100%;
 
-  padding: 12rem 2.4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3.6rem;
+
+  padding: 2.4rem;
 
   @media (min-width: 425px) {
-    display: flex;
-    flex-direction: column;
+    padding-top: 4.8rem;
     justify-content: center;
-    padding-top: 0;
+    gap: 2.4rem;
     overflow: auto;
   }
 
@@ -203,13 +199,12 @@ export const Main = styled.main`
     line-height: 2.4rem;
     letter-spacing: 0.25px;
     color: ${({ theme }) => theme.COLORS.BLUE};
-    margin-bottom: 4rem;
+    margin-bottom: 3.6rem;
 
     @media (min-width: 425px) {
       font-size: 3.4rem;
       max-width: 744px;
       line-height: 3.4rem;
-      margin-top: 11.2rem;
     }
   }
 
@@ -229,17 +224,18 @@ export const Main = styled.main`
 `;
 
 export const Projects = styled.ul`
-  margin-bottom: 77px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2.4rem;
-
-  @media (min-width: 425px) {
     max-width: 100%;
-    
-    /* margin-top: 4rem; */
-  }
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 425px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2.4rem;
+        overflow: auto;
+        /* margin-top: 4rem; */
+    }
 `;
 
 export const BlankSpace = styled.div`

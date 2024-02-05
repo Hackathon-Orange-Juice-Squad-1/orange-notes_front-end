@@ -1,6 +1,7 @@
 import { Container, Main, Projects, Thumbnail, Title } from "./styles";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { ProjectThumbnail } from "../../components/ProjectThumbnail";
 import { ProfileSmall } from "../../components/ProfileSmall";
 import { ModalPreview } from "../../components/ModalPreview";
 import { useState, useEffect } from "react";
@@ -41,20 +42,18 @@ export const Discover = () => {
                             </div>
                         </Thumbnail>
                     ))}
-                    <div>
-                        <ModalPreview
-                            avatar={focusedProject?.photoUrl}
-                            nome={focusedProject?.userName}
-                            data={focusedProject?.dataCriacao}
-                            title={focusedProject?.title}
-                            image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
-                            description={focusedProject?.desc}
-                            link={focusedProject?.link}
-                            onClick={() => setFocusedProject(null)}
-                            preview={focusedProject !== null}>
+                    <ModalPreview
+                        avatar={focusedProject?.photoUrl}
+                        nome={focusedProject?.userName}
+                        data={focusedProject?.dataCriacao}
+                        title={focusedProject?.title}
+                        image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
+                        description={focusedProject?.desc}
+                        link={focusedProject?.link}
+                        onClick={() => setFocusedProject(null)}
+                        preview={focusedProject !== null}>
 
-                        </ModalPreview>
-                    </div>
+                    </ModalPreview>
                 </Projects>
             </Main>
 
