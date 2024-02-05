@@ -1,9 +1,9 @@
-import { auth, googleProvider } from '../../services/firebase';
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { jwtDecode } from "jwt-decode";
+
 import { handleLogin } from '../../services/loginAuthService';
-import { handleGoogleLogin } from '../../services/googleAuthService';
 
 import {
   Content,
@@ -24,20 +24,25 @@ import imageIconOpen from "../../assets/img/visibility-on.png";
 
 import { Link } from "react-router-dom";
 
+const tokenClient = window.google.accounts.oauth2.initTokenClient({
+  client_id: "1095567261898-6eop9ig5u5fh70e5dqqan0empoiflbad.apps.googleusercontent.com",
+  scope: "https://www.googleapis.com/auth/userinfo.email",
+});
+
 export const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const googleLogin = async () => {
-    const result = await auth.signInWithPopup(googleProvider);
-    const googleToken = result.user;
-    const { uid, displayName, email, photoURL } = googleToken;
-
-    await handleGoogleLogin(uid, displayName, email, photoURL);
-    location.reload();
+  const loginGoogle = () => {
+    tokenClient.callback = () => {
+      // TODO: Salve user at backend using this token
+      navigate('/register');
+    };
+    tokenClient.requestAccessToken({ prompt: "consent" });
   };
 
   const login = (event) => {
@@ -46,8 +51,8 @@ export const Login = () => {
     const { email, password } = event.currentTarget;
 
     handleLogin(email.value, password.value)
-        .then(() => location.reload())
-        .catch(error => alert(error.message));
+      .then(() => location.reload())
+      .catch(error => alert(error.message));
   };
 
   return (
@@ -58,7 +63,7 @@ export const Login = () => {
       <Content>
         <h1>Entre no Orange Portfólio</h1>
 
-        <ButtonGoogle type="button" onClick={async () => {await googleLogin()}}>
+        <ButtonGoogle type="button" onClick={loginGoogle}>
           <LogoGoogle
             src={logoGoogle}
             alt="Logo Google"
@@ -87,7 +92,7 @@ export const Login = () => {
             onClick={handleClick}
           />
 
-          <Button type="submit" label="Entrar" style={{width: "100%", marginBottom: "1.8rem"}} $primary />
+          <Button type="submit" label="Entrar" style={{ width: "100%", marginBottom: "1.8rem" }} $primary />
 
           <Link to="/register">Cadastre-se</Link>
 
