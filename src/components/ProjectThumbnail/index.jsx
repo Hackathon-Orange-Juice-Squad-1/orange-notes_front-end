@@ -223,7 +223,7 @@ export const ProjectThumbnail = ({ onClick, className, thumb, tags = [], userNam
                 </div>
             </Modal>
 
-            <ModalConfirmDelete confirmDelete={confirmDelete} handleConfirmDeleteClick={deleteProject} handleCancelDeleteClick={handleCancelDeleteClick} deleteProject={handleDeleteClick} />
+            <ModalConfirmDelete confirmationText="excluir o projeto do seu portfólio" confirmDelete={confirmDelete} handleConfirmDeleteClick={deleteProject} handleCancelDeleteClick={handleCancelDeleteClick} deleteProject={handleDeleteClick} />
         </>
     );
 };
