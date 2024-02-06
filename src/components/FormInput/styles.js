@@ -10,16 +10,6 @@ export const Container = styled.div`
 
     position: relative;
 
-    &.active label {
-        transform: translate(0, -2.4rem) scale(0.75);
-        background-color: ${({theme}) => theme.COLORS.WHITE_1};
-    }
-
-    &:focus-within label {
-        transform: translate(0, -2.4rem) scale(0.75);
-        background-color: ${({theme}) => theme.COLORS.WHITE_1};
-    }
-
     @media (min-width: 425px) {
         max-width: 51.3rem;
     }
@@ -46,14 +36,17 @@ export const Container = styled.div`
 
         border: 1px solid ${({theme}) => theme.COLORS.GRAY_7};
         border-radius: 4px;
-
+        
         &::placeholder {
-            font-size: 1.6rem;
-            font-weight: 400;
-            line-height: 2.4rem;
-            letter-spacing: 0.15px;
-            color: ${({theme}) => theme.COLORS.GRAY_2};
+            color: transparent;
         }
+
+        &:not(:placeholder-shown) ~ label,
+        &:focus ~ label {
+            transform: translate(0, -2.4rem) scale(0.75);
+            background-color: ${({theme}) => theme.COLORS.WHITE_1};
+        }
+
     }
 
     > label {
