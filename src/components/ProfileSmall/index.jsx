@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserData } from "../../services/getUserData";
 import { Container } from "./styles";
 
-export const ProfileSmall = ({ index, className }) => {
+export const ProfileSmall = ({ index, className, userName, avatar }) => {
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         getUserData().then((response) => {
@@ -15,7 +15,7 @@ export const ProfileSmall = ({ index, className }) => {
             <img src={userData.userAvatar} alt="Imagem de avatar de usuário" />
 
             <div>
-                <h2>{userData.userName} {userData.userLastName}</h2>
+                <h2>{userName}</h2>
 
                 <span>{index}</span>
             </div>

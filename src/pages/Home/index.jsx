@@ -1,6 +1,6 @@
 import thumbnail from "../../assets/img/img_landingpage-3x.png";
 import { getUserProjects } from "../../services/getUserProjects";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { useTogglePreview } from "../../hooks/useTogglePreview";
 import { useToggleUserHasProjects } from "../../hooks/useToggleUserHasProjects";
@@ -29,7 +29,6 @@ export const Home = () => {
   const {
     userHasProjects,
     setUserHasProjects,
-    toggleUserHasProjects,
     checkUserProjects,
   } = useToggleUserHasProjects();
 
@@ -45,6 +44,12 @@ export const Home = () => {
       setProjects(response);
     });
   }, []);
+
+  const fileInputRef = useRef();
+
+  const handleImageUploadClick = () => {
+    fileInputRef.current.click();
+  };
 
   const [focusedProject, setFocusedProject] = useState(null);
 
@@ -87,7 +92,6 @@ export const Home = () => {
   };
 
   const handleConfirmDeleteClick = () => {
-    toggleDeletion(true);
     projects.deleteProject();
     toggleConfirmDeleteModal();
     toggleSuccessModal();
@@ -177,7 +181,7 @@ export const Home = () => {
                   tags={project?.tags}
                   thumb={
                     project?.image?.url ||
-                    "https://cdn-icons-png.freepik.com/512/408/408557.png"
+                    "https://img.freepik.com/fotos-gratis/inspiracao-desenvolvimento-moderno-criativo_53876-21248.jpg?w=996&t=st=1707142640~exp=1707143240~hmac=05607122ec7effc15bf1ba8cb1f54b466ccb16e0f51fed73ec5cff4bf5541f25"
                   }
                   title={project.title}
                   description={project.desc}
@@ -193,8 +197,6 @@ export const Home = () => {
                   toggleModal();
                   addModal();
                 }}
-                userHasProjects={userHasProjects}
-                toggleUserHasProjects={toggleUserHasProjects}
                 editModal={editModal}
                 toggleModal={toggleModal}
                 handleDeleteClick={handleDeleteClick}
@@ -212,7 +214,7 @@ export const Home = () => {
             title={focusedProject?.title}
             image={
               focusedProject?.image?.url ||
-              "https://cdn-icons-png.freepik.com/512/408/408557.png"
+              "https://img.freepik.com/fotos-gratis/inspiracao-desenvolvimento-moderno-criativo_53876-21248.jpg?w=996&t=st=1707142640~exp=1707143240~hmac=05607122ec7effc15bf1ba8cb1f54b466ccb16e0f51fed73ec5cff4bf5541f25"
             }
             description={focusedProject?.desc}
             link={focusedProject?.link}
@@ -257,12 +259,13 @@ export const Home = () => {
           <h3>Selecione o conteúdo que você deseja fazer upload</h3>
 
           <label htmlFor="upload">
-            <ButtonAddProject
-              onClick={toggleUserHasProjects}
-              className="on-edit"
-              userHasProjects={userHasProjects}
+            <ButtonAddProject onClick={handleImageUploadClick} />
+            <input
+              type="file"
+              id="upload"
+              ref={fileInputRef}
+              style={{ display: "none" }}
             />
-            <input type="file" id="upload" style={{ display: "none" }} />
           </label>
 
           <button

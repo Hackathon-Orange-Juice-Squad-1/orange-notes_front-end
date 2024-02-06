@@ -1,3 +1,4 @@
+import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
 import { Container, Main, Projects, Thumbnail, Title } from "./styles";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -35,10 +36,10 @@ export const Discover = () => {
                 <Projects>
                     {projectList.map((project) => (
                         <Thumbnail key={project._id} onClick={() => setFocusedProject(project)}>
-                            <img src={project?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'} alt="Thumbnail de preview do projeto" width="390px" height="260px" />
+                            <img src={project?.image?.url || 'https://img.freepik.com/fotos-gratis/inspiracao-desenvolvimento-moderno-criativo_53876-21248.jpg?w=996&t=st=1707142640~exp=1707143240~hmac=05607122ec7effc15bf1ba8cb1f54b466ccb16e0f51fed73ec5cff4bf5541f25'} alt="Thumbnail de preview do projeto" width="390px" height="260px" />
 
                             <div>
-                                <ProfileSmall avatar={project.photoUrl} userName={project.userName} index={project.dataCriacao} className="on-thumb" />
+                                <ProfileSmall avatar={project.photoUrl ? project.photoUrl : avatarPlaceholder} userName={project.userName} index={project.dataCriacao} className="on-thumb" />
                             </div>
                         </Thumbnail>
                     ))}
@@ -47,7 +48,7 @@ export const Discover = () => {
                         nome={focusedProject?.userName}
                         data={focusedProject?.dataCriacao}
                         title={focusedProject?.title}
-                        image={focusedProject?.image?.url || 'https://cdn-icons-png.freepik.com/512/408/408557.png'}
+                        image={focusedProject?.image?.url || 'https://img.freepik.com/fotos-gratis/inspiracao-desenvolvimento-moderno-criativo_53876-21248.jpg?w=996&t=st=1707142640~exp=1707143240~hmac=05607122ec7effc15bf1ba8cb1f54b466ccb16e0f51fed73ec5cff4bf5541f25'}
                         description={focusedProject?.desc}
                         link={focusedProject?.link}
                         onClick={() => setFocusedProject(null)}
