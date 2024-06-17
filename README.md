@@ -6,6 +6,8 @@ developed.
 
 This is an application built on [React][react-doc] and uses [Node.js 18][node-download] with [Vite.js][vite-doc] deployed using Vercel.
 
+Check out the deploy [HERE](https://orange-portfolio-front-deploy-ito0k0yhp-guihcastros-projects.vercel.app/)
+
 ## 🔍 Requirements
 
 This repository uses:
