@@ -1,41 +1,20 @@
-import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
+function isTokenValid(userToken) {
+  if (typeof userToken !== "string" || userToken === "") return false;
+
+  try {
+    const token = jwtDecode(userToken);
+    return token === null ? false : true;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+}
+
 export const useIsLoggedIn = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    let token = localStorage.getItem('token');
-    let storedToken = localStorage.getItem('google_login_token');
-    // let token = "dsahkjdhasjkdsa";  
-    // let storedToken = null;  
+    const token = localStorage.getItem("token");
+    const isLoggedIn = isTokenValid(token);
 
-    useEffect(() => {
-        const isTokenVerified = isTokenValid(token) || isGoogleTokenValid(storedToken);
-
-        if (isTokenVerified) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-        }
-    }, [token]);
-
-    function isGoogleTokenValid(googleToken) {
-        try {
-            return googleToken === null ? false : true;
-        } catch (err) {
-            console.log(err);
-            return false;
-        }
-    }
-
-    function isTokenValid(userToken) {
-        try {
-            const token = jwtDecode(userToken);
-            return token === null ? false : true;
-        } catch (err) {
-            console.log(err);
-            return false;
-        }
-    }
-
-    return { isLoggedIn };
+  return { isLoggedIn };
 };
